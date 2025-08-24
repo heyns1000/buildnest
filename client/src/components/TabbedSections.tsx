@@ -14,6 +14,8 @@ import LoopPayPortal from './LoopPayPortal';
 import SecureSignAPI from './SecureSignAPI';
 import SouthAfricanBrands from './SouthAfricanBrands';
 import BrandControlCenter from './BrandControlCenter';
+import FAAPayrollOS from './FAAPayrollOS';
+import SeedwaveOmniSync from './SeedwaveOmniSync';
 
 interface TabSection {
   id: string;
@@ -142,6 +144,24 @@ const tabSections: TabSection[] = [
     icon: 'fas fa-tools',
     component: MiningEquipment,
     description: 'Mining hardware status and management',
+    category: 'management'
+  },
+  
+  // Advanced Enterprise & Management  
+  {
+    id: 'faa-payroll',
+    name: 'FAA™ Payroll OS',
+    icon: 'fas fa-users-cog',
+    component: FAAPayrollOS,
+    description: 'Global payroll enterprise system with cultural harmony and multi-language support',
+    category: 'enterprise'
+  },
+  {
+    id: 'seedwave-omnisync',
+    name: 'Seedwave-OmniSync™',
+    icon: 'fas fa-scroll',
+    component: SeedwaveOmniSync,
+    description: 'Full system extraction managing 7038 active scrolls with real-time data processing',
     category: 'management'
   },
   
