@@ -6,6 +6,14 @@ import MiningEquipment from './MiningEquipment';
 import FinancialTracking from './FinancialTracking';
 import OperationsLogging from './OperationsLogging';
 import MotorControls from './MotorControls';
+import CodeNestDashboard from './CodeNestDashboard';
+import CrateDancePricing from './CrateDancePricing';
+import MediaSonicDashboard from './MediaSonicDashboard';
+import HotStackDeployment from './HotStackDeployment';
+import LoopPayPortal from './LoopPayPortal';
+import SecureSignAPI from './SecureSignAPI';
+import SouthAfricanBrands from './SouthAfricanBrands';
+import BrandControlCenter from './BrandControlCenter';
 
 interface TabSection {
   id: string;
@@ -13,10 +21,11 @@ interface TabSection {
   icon: string;
   component: React.ComponentType;
   description: string;
-  category: 'operations' | 'management' | 'monitoring';
+  category: 'operations' | 'management' | 'monitoring' | 'development' | 'business' | 'enterprise';
 }
 
 const tabSections: TabSection[] = [
+  // Core Operations
   {
     id: 'deployment',
     name: 'Deployment',
@@ -42,6 +51,84 @@ const tabSections: TabSection[] = [
     category: 'operations'
   },
   {
+    id: 'hotstack',
+    name: 'HotStack™ Omnidrop',
+    icon: 'fas fa-fire',
+    component: HotStackDeployment,
+    description: 'Rapid deployment system with drag & drop file upload and countdown timer',
+    category: 'operations'
+  },
+  
+  // Development & Code Management
+  {
+    id: 'codenest',
+    name: 'CodeNest™ Dashboard',
+    icon: 'fas fa-code',
+    component: CodeNestDashboard,
+    description: 'Complete project management with API keys, templates, and code editor',
+    category: 'development'
+  },
+  {
+    id: 'media-sonic',
+    name: 'Media & Sonic Studio',
+    icon: 'fas fa-music',
+    component: MediaSonicDashboard,
+    description: 'Media production dashboard with Firebase integration and audio library',
+    category: 'development'
+  },
+  {
+    id: 'securesign',
+    name: 'SecureSign™ API',
+    icon: 'fas fa-file-signature',
+    component: SecureSignAPI,
+    description: 'Digital signature and NDA management with API key administration',
+    category: 'development'
+  },
+  
+  // Business & Financial
+  {
+    id: 'looppay',
+    name: 'LoopPay™ Portal',
+    icon: 'fas fa-credit-card',
+    component: LoopPayPortal,
+    description: 'Sovereign payment portal with currency converter and AI assistant',
+    category: 'business'
+  },
+  {
+    id: 'crate-dance',
+    name: 'Crate Dance Pricing',
+    icon: 'fas fa-dollar-sign',
+    component: CrateDancePricing,
+    description: 'Sponsorship tier pricing with PayPal integration and multi-language support',
+    category: 'business'
+  },
+  {
+    id: 'financial',
+    name: 'Financial Tracking',
+    icon: 'fas fa-chart-line',
+    component: FinancialTracking,
+    description: 'Financial metrics and transaction tracking',
+    category: 'business'
+  },
+  
+  // Enterprise & Management
+  {
+    id: 'brand-control',
+    name: 'Brand Control Center',
+    icon: 'fas fa-gem',
+    component: BrandControlCenter,
+    description: 'FAA™ Brand Control Center SPA with comprehensive brand entity management',
+    category: 'enterprise'
+  },
+  {
+    id: 'south-africa',
+    name: 'South African Brands',
+    icon: 'fas fa-globe-africa',
+    component: SouthAfricanBrands,
+    description: 'Regional brand intelligence dashboard with maps, charts, and AI analysis',
+    category: 'enterprise'
+  },
+  {
     id: 'demo',
     name: 'Demo Controls',
     icon: 'fas fa-play-circle',
@@ -57,14 +144,8 @@ const tabSections: TabSection[] = [
     description: 'Mining hardware status and management',
     category: 'management'
   },
-  {
-    id: 'financial',
-    name: 'Financial',
-    icon: 'fas fa-chart-line',
-    component: FinancialTracking,
-    description: 'Financial metrics and transaction tracking',
-    category: 'monitoring'
-  },
+  
+  // Monitoring & Logging
   {
     id: 'logging',
     name: 'Operations Log',
@@ -79,7 +160,7 @@ export default function TabbedSections() {
   const [activeTab, setActiveTab] = useState<string>('deployment');
   const [activeCategory, setActiveCategory] = useState<string>('all');
 
-  const categories = ['all', 'operations', 'management', 'monitoring'];
+  const categories = ['all', 'operations', 'development', 'business', 'enterprise', 'management', 'monitoring'];
   
   const filteredTabs = tabSections.filter(tab => 
     activeCategory === 'all' || tab.category === activeCategory
@@ -90,6 +171,9 @@ export default function TabbedSections() {
   const getCategoryColor = (category: string) => {
     switch (category) {
       case 'operations': return 'text-apple-green';
+      case 'development': return 'text-purple-400';
+      case 'business': return 'text-yellow-400';
+      case 'enterprise': return 'text-blue-400';
       case 'management': return 'text-apple-blue';
       case 'monitoring': return 'text-faa-yellow';
       default: return 'text-gray-400';
@@ -99,6 +183,9 @@ export default function TabbedSections() {
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case 'operations': return 'fas fa-cogs';
+      case 'development': return 'fas fa-code';
+      case 'business': return 'fas fa-briefcase';
+      case 'enterprise': return 'fas fa-building';
       case 'management': return 'fas fa-tasks';
       case 'monitoring': return 'fas fa-chart-bar';
       default: return 'fas fa-circle';
