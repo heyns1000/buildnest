@@ -16,6 +16,11 @@ import SouthAfricanBrands from './SouthAfricanBrands';
 import BrandControlCenter from './BrandControlCenter';
 import FAAPayrollOS from './FAAPayrollOS';
 import SeedwaveOmniSync from './SeedwaveOmniSync';
+import AncestorTagHeritagePortal from './AncestorTagHeritagePortal';
+import MonsterOmniOperatorConsole from './MonsterOmniOperatorConsole';
+import FAADemoDashboard from './FAADemoDashboard';
+import GlobalPaymentPortal from './GlobalPaymentPortal';
+import MasterIndexSystem from './MasterIndexSystem';
 
 interface TabSection {
   id: string;
@@ -165,6 +170,48 @@ const tabSections: TabSection[] = [
     category: 'management'
   },
   
+  // 33-Year Giant Ecosystem - Beyond AI Systems
+  {
+    id: 'ancestortag-heritage',
+    name: 'AncestorTag™ Heritage',
+    icon: 'fas fa-users',
+    component: AncestorTagHeritagePortal,
+    description: 'Advanced genealogy and digital heritage preservation with blockchain provenance',
+    category: 'enterprise'
+  },
+  {
+    id: 'monster-omni-console',
+    name: 'MONSTER OMNI™ Console',
+    icon: 'fas fa-satellite-dish',
+    component: MonsterOmniOperatorConsole,
+    description: 'Grand operator console with 20 fused logic engines and destructive power capabilities',
+    category: 'operations'
+  },
+  {
+    id: 'faa-demo-dashboard',
+    name: 'FAA.zone™ Live Demo',
+    icon: 'fas fa-atom',
+    component: FAADemoDashboard,
+    description: 'Atom-level engine management with real-time KPI monitoring and demo configuration',
+    category: 'development'
+  },
+  {
+    id: 'global-payment-portal',
+    name: 'Global Payment Portal',
+    icon: 'fas fa-globe-americas',
+    component: GlobalPaymentPortal,
+    description: 'Comprehensive payment systems with multi-currency support, PayPal integration, and SSO',
+    category: 'business'
+  },
+  {
+    id: 'master-index-system',
+    name: 'Master Index System',
+    icon: 'fas fa-sitemap',
+    component: MasterIndexSystem,
+    description: 'Complete sector index and master navigation for the entire Fruitful ecosystem',
+    category: 'management'
+  },
+
   // Monitoring & Logging
   {
     id: 'logging',
