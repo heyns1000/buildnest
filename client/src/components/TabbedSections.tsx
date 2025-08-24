@@ -5,6 +5,7 @@ import DemoControls from './DemoControls';
 import MiningEquipment from './MiningEquipment';
 import FinancialTracking from './FinancialTracking';
 import OperationsLogging from './OperationsLogging';
+import MotorControls from './MotorControls';
 
 interface TabSection {
   id: string;
@@ -30,6 +31,14 @@ const tabSections: TabSection[] = [
     icon: 'fas fa-brain',
     component: CoreAbilities,
     description: 'System capabilities and feature toggles',
+    category: 'operations'
+  },
+  {
+    id: 'motors',
+    name: 'Motor Controls',
+    icon: 'fas fa-cogs',
+    component: MotorControls,
+    description: 'Isolated motor engines with BROEM controls',
     category: 'operations'
   },
   {
