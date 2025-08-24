@@ -6,6 +6,7 @@ import LogicCores from '@/components/LogicCores';
 import OmniNetwork from '@/components/OmniNetwork';
 import SecurityLayers from '@/components/SecurityLayers';
 import CommandCenter from '@/components/CommandCenter';
+import TabbedSections from '@/components/TabbedSections';
 
 export default function Dashboard() {
   useEffect(() => {
@@ -28,6 +29,7 @@ export default function Dashboard() {
         <OmniNetwork />
         <SecurityLayers />
         <CommandCenter />
+        <TabbedSections />
       </main>
     </div>
   );

@@ -78,6 +78,15 @@ export default function Header() {
                   Security
                 </button>
               </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('tabbed-sections')}
+                  className="text-gray-300 hover:text-faa-yellow transition-colors"
+                  data-testid="nav-advanced-ops"
+                >
+                  Advanced Ops
+                </button>
+              </li>
             </ul>
           </nav>
 
