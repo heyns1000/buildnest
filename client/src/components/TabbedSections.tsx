@@ -27,6 +27,8 @@ import VaultMeshPayrollOS from './VaultMeshPayrollOS';
 import SectorScrollsManager from './SectorScrollsManager';
 import TreatyMeshController from './TreatyMeshController';
 import MiningSectorConsole from './MiningSectorConsole';
+import BuildNestAIEngineConsole from './BuildNestAIEngineConsole';
+import PayrollOSMasterIndex from './PayrollOSMasterIndex';
 
 interface TabSection {
   id: string;
@@ -266,6 +268,22 @@ const tabSections: TabSection[] = [
     component: MiningSectorConsole,
     description: 'Complete Mining Operations Control Center | OreXcel™, MineForge™, Digium™, Minerva™, MineralVision™',
     category: 'operations'
+  },
+  {
+    id: 'buildnest-ai-engines',
+    name: 'BuildNest™ AI Engine Console',
+    icon: 'fas fa-brain',
+    component: BuildNestAIEngineConsole,
+    description: 'Complete BuildNest AI engine ecosystem with 9 processing engines, live KPI metrics, and African schools deployment',
+    category: 'operations'
+  },
+  {
+    id: 'payroll-os-master',
+    name: 'Payroll OS Master Index',
+    icon: 'fas fa-money-check-alt',
+    component: PayrollOSMasterIndex,
+    description: 'FAA™ Payroll OS Master Index - Complete enterprise payroll system with global compliance and live data processing',
+    category: 'enterprise'
   },
 
   // Monitoring & Logging
