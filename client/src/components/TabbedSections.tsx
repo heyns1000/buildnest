@@ -29,6 +29,7 @@ import TreatyMeshController from './TreatyMeshController';
 import MiningSectorConsole from './MiningSectorConsole';
 import BuildNestAIEngineConsole from './BuildNestAIEngineConsole';
 import PayrollOSMasterIndex from './PayrollOSMasterIndex';
+import SeedwaveAdminPortal from './SeedwaveAdminPortal';
 
 interface TabSection {
   id: string;
@@ -283,6 +284,14 @@ const tabSections: TabSection[] = [
     icon: 'fas fa-money-check-alt',
     component: PayrollOSMasterIndex,
     description: 'FAA™ Payroll OS Master Index - Complete enterprise payroll system with global compliance and live data processing',
+    category: 'enterprise'
+  },
+  {
+    id: 'seedwave-admin-portal',
+    name: 'Seedwave™ Admin Portal',
+    icon: 'fas fa-seedling',
+    component: SeedwaveAdminPortal,
+    description: 'Complete Seedwave Admin Portal with 29 sector navigation, access portals, and live pulse grid monitoring',
     category: 'enterprise'
   },
 
