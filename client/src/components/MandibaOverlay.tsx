@@ -30,9 +30,9 @@ export default function MandibaOverlay({ isVisible, onComplete }: MandibaOverlay
           className="mb-8"
         >
           <img 
-            src="@assets/monster_omni_core_engines_nodes_demo_1756078341054.html" 
+            src="@assets/Madiba_mock_1756082668111.png" 
             alt="MANDIBA"
-            className="h-32 md:h-48 mx-auto"
+            className="h-48 md:h-64 mx-auto rounded-lg"
           />
         </motion.div>
         
