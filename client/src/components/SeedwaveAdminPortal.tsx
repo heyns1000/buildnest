@@ -9,6 +9,41 @@ interface SectorData {
   brandCount: number;
   status: 'Active' | 'Monitoring' | 'Sync';
   signalStrength: number;
+  brands: BrandDetails[];
+  operationalData: OperationalMetrics;
+  complianceScore: number;
+  revenue: number;
+  growthRate: number;
+}
+
+interface BrandDetails {
+  id: string;
+  name: string;
+  type: string;
+  status: string;
+  revenue: number;
+  employees: number;
+  founded: string;
+  location: string;
+  technology: string[];
+  partnerships: string[];
+  metrics: {
+    marketShare: number;
+    customerSatisfaction: number;
+    innovationIndex: number;
+    sustainabilityScore: number;
+  };
+}
+
+interface OperationalMetrics {
+  uptime: number;
+  throughput: number;
+  errorRate: number;
+  latency: number;
+  capacity: number;
+  utilization: number;
+  maintenance: string;
+  upgrades: string[];
 }
 
 interface NavigationItem {
@@ -86,36 +121,450 @@ export default function SeedwaveAdminPortal() {
     { id: 'ecosync-logs', name: 'Ecosync Logs', icon: '📥', url: 'ecosync-logs.html', status: 'active' }
   ];
 
+  const generateBrandDetails = (sectorId: string, count: number): BrandDetails[] => {
+    const brandTypes = ['Enterprise', 'Startup', 'SME', 'Corporation', 'Partnership', 'Cooperative'];
+    const statuses = ['Active', 'Growing', 'Stable', 'Expanding', 'Optimizing'];
+    const technologies = ['AI/ML', 'Blockchain', 'IoT', 'Cloud', 'Edge Computing', 'Quantum', 'AR/VR', 'Robotics'];
+    const locations = ['Global', 'North America', 'Europe', 'Asia Pacific', 'Latin America', 'Africa', 'Middle East'];
+    
+    return Array.from({ length: count }, (_, i) => ({
+      id: `${sectorId}_brand_${i + 1}`,
+      name: `${sectorId.charAt(0).toUpperCase() + sectorId.slice(1)} Brand ${i + 1}`,
+      type: brandTypes[Math.floor(Math.random() * brandTypes.length)],
+      status: statuses[Math.floor(Math.random() * statuses.length)],
+      revenue: Math.floor(Math.random() * 50000000) + 1000000,
+      employees: Math.floor(Math.random() * 5000) + 10,
+      founded: `${2000 + Math.floor(Math.random() * 24)}`,
+      location: locations[Math.floor(Math.random() * locations.length)],
+      technology: technologies.slice(0, Math.floor(Math.random() * 4) + 1),
+      partnerships: Array.from({ length: Math.floor(Math.random() * 5) + 1 }, (_, j) => `Partner ${j + 1}`),
+      metrics: {
+        marketShare: Math.round((Math.random() * 20 + 5) * 10) / 10,
+        customerSatisfaction: Math.round((Math.random() * 20 + 75) * 10) / 10,
+        innovationIndex: Math.round((Math.random() * 30 + 60) * 10) / 10,
+        sustainabilityScore: Math.round((Math.random() * 25 + 70) * 10) / 10
+      }
+    }));
+  };
+
+  const generateOperationalData = (): OperationalMetrics => ({
+    uptime: Math.round((Math.random() * 5 + 95) * 100) / 100,
+    throughput: Math.floor(Math.random() * 10000) + 1000,
+    errorRate: Math.round((Math.random() * 2) * 100) / 100,
+    latency: Math.round((Math.random() * 50 + 10) * 10) / 10,
+    capacity: Math.floor(Math.random() * 100000) + 10000,
+    utilization: Math.round((Math.random() * 30 + 65) * 10) / 10,
+    maintenance: 'Scheduled',
+    upgrades: ['Security Patch 2.1', 'Performance Optimization', 'API Enhancement']
+  });
+
   const sectorData: SectorData[] = [
-    { id: 'agriculture', name: 'Agriculture & Biotech', icon: '🌱', category: 'Primary', brandCount: 247, status: 'Active', signalStrength: 94.2 },
-    { id: 'fsf', name: 'Food, Soil & Farming', icon: '🥦', category: 'Primary', brandCount: 189, status: 'Active', signalStrength: 91.8 },
-    { id: 'banking', name: 'Banking & Finance', icon: '🏦', category: 'Financial', brandCount: 456, status: 'Active', signalStrength: 98.7 },
-    { id: 'creative', name: 'Creative Tech', icon: '🖋️', category: 'Technology', brandCount: 312, status: 'Monitoring', signalStrength: 87.3 },
-    { id: 'logistics', name: 'Logistics & Packaging', icon: '📦', category: 'Operations', brandCount: 298, status: 'Active', signalStrength: 93.1 },
-    { id: 'education-ip', name: 'Education & IP', icon: '📚', category: 'Knowledge', brandCount: 234, status: 'Active', signalStrength: 89.6 },
-    { id: 'fashion', name: 'Fashion & Identity', icon: '✂', category: 'Consumer', brandCount: 178, status: 'Sync', signalStrength: 82.4 },
-    { id: 'gaming', name: 'Gaming & Simulation', icon: '🎮', category: 'Entertainment', brandCount: 367, status: 'Active', signalStrength: 96.2 },
-    { id: 'health', name: 'Health & Hygiene', icon: '🧠', category: 'Healthcare', brandCount: 423, status: 'Active', signalStrength: 97.8 },
-    { id: 'housing', name: 'Housing & Infrastructure', icon: '🏗️', category: 'Infrastructure', brandCount: 345, status: 'Active', signalStrength: 88.9 },
-    { id: 'justice', name: 'Justice & Ethics', icon: '⚖', category: 'Governance', brandCount: 156, status: 'Monitoring', signalStrength: 91.3 },
-    { id: 'knowledge', name: 'Knowledge & Archives', icon: '📖', category: 'Knowledge', brandCount: 289, status: 'Active', signalStrength: 94.7 },
-    { id: 'micromesh', name: 'Micro-Mesh Logistics', icon: '☰', category: 'Operations', brandCount: 145, status: 'Sync', signalStrength: 85.1 },
-    { id: 'media', name: 'Motion, Media & Sonic', icon: '🎬', category: 'Entertainment', brandCount: 398, status: 'Active', signalStrength: 92.6 },
-    { id: 'nutrition', name: 'Nutrition & Food Chain', icon: '✿', category: 'Primary', brandCount: 267, status: 'Active', signalStrength: 90.4 },
-    { id: 'ai-logic', name: 'AI, Logic & Grid', icon: '🧠', category: 'Technology', brandCount: 578, status: 'Active', signalStrength: 99.1 },
-    { id: 'packaging', name: 'Packaging & Materials', icon: '📦', category: 'Operations', brandCount: 234, status: 'Active', signalStrength: 87.2 },
-    { id: 'quantum', name: 'Quantum Protocols', icon: '✴️', category: 'Technology', brandCount: 89, status: 'Monitoring', signalStrength: 94.8 },
-    { id: 'ritual', name: 'Ritual & Culture', icon: '☯', category: 'Social', brandCount: 123, status: 'Sync', signalStrength: 83.7 },
-    { id: 'saas', name: 'SaaS & Licensing', icon: '🔑', category: 'Technology', brandCount: 445, status: 'Active', signalStrength: 95.3 },
-    { id: 'trade', name: 'Trade Systems', icon: '🧺', category: 'Commercial', brandCount: 356, status: 'Active', signalStrength: 89.8 },
-    { id: 'utilities', name: 'Utilities & Energy', icon: '🔋', category: 'Infrastructure', brandCount: 198, status: 'Active', signalStrength: 96.4 },
-    { id: 'voice', name: 'Voice & Audio', icon: '🎙️', category: 'Entertainment', brandCount: 167, status: 'Monitoring', signalStrength: 88.3 },
-    { id: 'webless', name: 'Webless Tech & Nodes', icon: '📡', category: 'Technology', brandCount: 145, status: 'Sync', signalStrength: 92.1 },
-    { id: 'nft', name: 'NFT & Ownership', icon: '🔁', category: 'Digital', brandCount: 234, status: 'Active', signalStrength: 87.9 },
-    { id: 'education-youth', name: 'Education & Youth', icon: '🎓', category: 'Knowledge', brandCount: 298, status: 'Active', signalStrength: 93.5 },
-    { id: 'zerowaste', name: 'Zero Waste', icon: '♻️', category: 'Environmental', brandCount: 178, status: 'Monitoring', signalStrength: 86.7 },
-    { id: 'professional', name: 'Professional Services', icon: '🧾', category: 'Business', brandCount: 389, status: 'Active', signalStrength: 91.4 },
-    { id: 'payroll-mining', name: 'Payroll Mining & Accounting', icon: '🪙', category: 'Financial', brandCount: 267, status: 'Active', signalStrength: 97.2 }
+    {
+      id: 'agriculture',
+      name: 'Agriculture & Biotech',
+      icon: '🌱',
+      category: 'Primary',
+      brandCount: 247,
+      status: 'Active',
+      signalStrength: 94.2,
+      brands: generateBrandDetails('agriculture', 247),
+      operationalData: generateOperationalData(),
+      complianceScore: 96.8,
+      revenue: 1250000000,
+      growthRate: 12.4
+    },
+    {
+      id: 'fsf',
+      name: 'Food, Soil & Farming',
+      icon: '🥦',
+      category: 'Primary',
+      brandCount: 189,
+      status: 'Active',
+      signalStrength: 91.8,
+      brands: generateBrandDetails('fsf', 189),
+      operationalData: generateOperationalData(),
+      complianceScore: 94.3,
+      revenue: 890000000,
+      growthRate: 8.7
+    },
+    {
+      id: 'banking',
+      name: 'Banking & Finance',
+      icon: '🏦',
+      category: 'Financial',
+      brandCount: 456,
+      status: 'Active',
+      signalStrength: 98.7,
+      brands: generateBrandDetails('banking', 456),
+      operationalData: generateOperationalData(),
+      complianceScore: 99.2,
+      revenue: 5670000000,
+      growthRate: 15.8
+    },
+    {
+      id: 'creative',
+      name: 'Creative Tech',
+      icon: '🖋️',
+      category: 'Technology',
+      brandCount: 312,
+      status: 'Monitoring',
+      signalStrength: 87.3,
+      brands: generateBrandDetails('creative', 312),
+      operationalData: generateOperationalData(),
+      complianceScore: 89.7,
+      revenue: 2340000000,
+      growthRate: 22.1
+    },
+    {
+      id: 'logistics',
+      name: 'Logistics & Packaging',
+      icon: '📦',
+      category: 'Operations',
+      brandCount: 298,
+      status: 'Active',
+      signalStrength: 93.1,
+      brands: generateBrandDetails('logistics', 298),
+      operationalData: generateOperationalData(),
+      complianceScore: 92.6,
+      revenue: 1890000000,
+      growthRate: 9.3
+    },
+    {
+      id: 'education-ip',
+      name: 'Education & IP',
+      icon: '📚',
+      category: 'Knowledge',
+      brandCount: 234,
+      status: 'Active',
+      signalStrength: 89.6,
+      brands: generateBrandDetails('education-ip', 234),
+      operationalData: generateOperationalData(),
+      complianceScore: 91.8,
+      revenue: 1560000000,
+      growthRate: 14.2
+    },
+    {
+      id: 'fashion',
+      name: 'Fashion & Identity',
+      icon: '✂',
+      category: 'Consumer',
+      brandCount: 178,
+      status: 'Sync',
+      signalStrength: 82.4,
+      brands: generateBrandDetails('fashion', 178),
+      operationalData: generateOperationalData(),
+      complianceScore: 87.3,
+      revenue: 980000000,
+      growthRate: 18.7
+    },
+    {
+      id: 'gaming',
+      name: 'Gaming & Simulation',
+      icon: '🎮',
+      category: 'Entertainment',
+      brandCount: 367,
+      status: 'Active',
+      signalStrength: 96.2,
+      brands: generateBrandDetails('gaming', 367),
+      operationalData: generateOperationalData(),
+      complianceScore: 94.1,
+      revenue: 4560000000,
+      growthRate: 28.9
+    },
+    {
+      id: 'health',
+      name: 'Health & Hygiene',
+      icon: '🧠',
+      category: 'Healthcare',
+      brandCount: 423,
+      status: 'Active',
+      signalStrength: 97.8,
+      brands: generateBrandDetails('health', 423),
+      operationalData: generateOperationalData(),
+      complianceScore: 98.7,
+      revenue: 6780000000,
+      growthRate: 16.4
+    },
+    {
+      id: 'housing',
+      name: 'Housing & Infrastructure',
+      icon: '🏗️',
+      category: 'Infrastructure',
+      brandCount: 345,
+      status: 'Active',
+      signalStrength: 88.9,
+      brands: generateBrandDetails('housing', 345),
+      operationalData: generateOperationalData(),
+      complianceScore: 90.5,
+      revenue: 3450000000,
+      growthRate: 7.8
+    },
+    {
+      id: 'justice',
+      name: 'Justice & Ethics',
+      icon: '⚖',
+      category: 'Governance',
+      brandCount: 156,
+      status: 'Monitoring',
+      signalStrength: 91.3,
+      brands: generateBrandDetails('justice', 156),
+      operationalData: generateOperationalData(),
+      complianceScore: 97.2,
+      revenue: 780000000,
+      growthRate: 5.2
+    },
+    {
+      id: 'knowledge',
+      name: 'Knowledge & Archives',
+      icon: '📖',
+      category: 'Knowledge',
+      brandCount: 289,
+      status: 'Active',
+      signalStrength: 94.7,
+      brands: generateBrandDetails('knowledge', 289),
+      operationalData: generateOperationalData(),
+      complianceScore: 95.4,
+      revenue: 2100000000,
+      growthRate: 11.7
+    },
+    {
+      id: 'micromesh',
+      name: 'Micro-Mesh Logistics',
+      icon: '☰',
+      category: 'Operations',
+      brandCount: 145,
+      status: 'Sync',
+      signalStrength: 85.1,
+      brands: generateBrandDetails('micromesh', 145),
+      operationalData: generateOperationalData(),
+      complianceScore: 88.9,
+      revenue: 670000000,
+      growthRate: 31.2
+    },
+    {
+      id: 'media',
+      name: 'Motion, Media & Sonic',
+      icon: '🎬',
+      category: 'Entertainment',
+      brandCount: 398,
+      status: 'Active',
+      signalStrength: 92.6,
+      brands: generateBrandDetails('media', 398),
+      operationalData: generateOperationalData(),
+      complianceScore: 91.3,
+      revenue: 3890000000,
+      growthRate: 19.6
+    },
+    {
+      id: 'nutrition',
+      name: 'Nutrition & Food Chain',
+      icon: '✿',
+      category: 'Primary',
+      brandCount: 267,
+      status: 'Active',
+      signalStrength: 90.4,
+      brands: generateBrandDetails('nutrition', 267),
+      operationalData: generateOperationalData(),
+      complianceScore: 93.8,
+      revenue: 1890000000,
+      growthRate: 13.1
+    },
+    {
+      id: 'ai-logic',
+      name: 'AI, Logic & Grid',
+      icon: '🧠',
+      category: 'Technology',
+      brandCount: 578,
+      status: 'Active',
+      signalStrength: 99.1,
+      brands: generateBrandDetails('ai-logic', 578),
+      operationalData: generateOperationalData(),
+      complianceScore: 98.9,
+      revenue: 8900000000,
+      growthRate: 42.7
+    },
+    {
+      id: 'packaging',
+      name: 'Packaging & Materials',
+      icon: '📦',
+      category: 'Operations',
+      brandCount: 234,
+      status: 'Active',
+      signalStrength: 87.2,
+      brands: generateBrandDetails('packaging', 234),
+      operationalData: generateOperationalData(),
+      complianceScore: 89.4,
+      revenue: 1340000000,
+      growthRate: 6.9
+    },
+    {
+      id: 'quantum',
+      name: 'Quantum Protocols',
+      icon: '✴️',
+      category: 'Technology',
+      brandCount: 89,
+      status: 'Monitoring',
+      signalStrength: 94.8,
+      brands: generateBrandDetails('quantum', 89),
+      operationalData: generateOperationalData(),
+      complianceScore: 96.7,
+      revenue: 2340000000,
+      growthRate: 67.8
+    },
+    {
+      id: 'ritual',
+      name: 'Ritual & Culture',
+      icon: '☯',
+      category: 'Social',
+      brandCount: 123,
+      status: 'Sync',
+      signalStrength: 83.7,
+      brands: generateBrandDetails('ritual', 123),
+      operationalData: generateOperationalData(),
+      complianceScore: 86.2,
+      revenue: 450000000,
+      growthRate: 8.4
+    },
+    {
+      id: 'saas',
+      name: 'SaaS & Licensing',
+      icon: '🔑',
+      category: 'Technology',
+      brandCount: 445,
+      status: 'Active',
+      signalStrength: 95.3,
+      brands: generateBrandDetails('saas', 445),
+      operationalData: generateOperationalData(),
+      complianceScore: 94.8,
+      revenue: 7890000000,
+      growthRate: 34.2
+    },
+    {
+      id: 'trade',
+      name: 'Trade Systems',
+      icon: '🧺',
+      category: 'Commercial',
+      brandCount: 356,
+      status: 'Active',
+      signalStrength: 89.8,
+      brands: generateBrandDetails('trade', 356),
+      operationalData: generateOperationalData(),
+      complianceScore: 91.7,
+      revenue: 4560000000,
+      growthRate: 12.8
+    },
+    {
+      id: 'utilities',
+      name: 'Utilities & Energy',
+      icon: '🔋',
+      category: 'Infrastructure',
+      brandCount: 198,
+      status: 'Active',
+      signalStrength: 96.4,
+      brands: generateBrandDetails('utilities', 198),
+      operationalData: generateOperationalData(),
+      complianceScore: 97.8,
+      revenue: 5670000000,
+      growthRate: 9.1
+    },
+    {
+      id: 'voice',
+      name: 'Voice & Audio',
+      icon: '🎙️',
+      category: 'Entertainment',
+      brandCount: 167,
+      status: 'Monitoring',
+      signalStrength: 88.3,
+      brands: generateBrandDetails('voice', 167),
+      operationalData: generateOperationalData(),
+      complianceScore: 90.6,
+      revenue: 1230000000,
+      growthRate: 24.7
+    },
+    {
+      id: 'webless',
+      name: 'Webless Tech & Nodes',
+      icon: '📡',
+      category: 'Technology',
+      brandCount: 145,
+      status: 'Sync',
+      signalStrength: 92.1,
+      brands: generateBrandDetails('webless', 145),
+      operationalData: generateOperationalData(),
+      complianceScore: 93.4,
+      revenue: 1890000000,
+      growthRate: 45.3
+    },
+    {
+      id: 'nft',
+      name: 'NFT & Ownership',
+      icon: '🔁',
+      category: 'Digital',
+      brandCount: 234,
+      status: 'Active',
+      signalStrength: 87.9,
+      brands: generateBrandDetails('nft', 234),
+      operationalData: generateOperationalData(),
+      complianceScore: 89.2,
+      revenue: 3450000000,
+      growthRate: 89.7
+    },
+    {
+      id: 'education-youth',
+      name: 'Education & Youth',
+      icon: '🎓',
+      category: 'Knowledge',
+      brandCount: 298,
+      status: 'Active',
+      signalStrength: 93.5,
+      brands: generateBrandDetails('education-youth', 298),
+      operationalData: generateOperationalData(),
+      complianceScore: 95.1,
+      revenue: 2340000000,
+      growthRate: 17.4
+    },
+    {
+      id: 'zerowaste',
+      name: 'Zero Waste',
+      icon: '♻️',
+      category: 'Environmental',
+      brandCount: 178,
+      status: 'Monitoring',
+      signalStrength: 86.7,
+      brands: generateBrandDetails('zerowaste', 178),
+      operationalData: generateOperationalData(),
+      complianceScore: 92.3,
+      revenue: 890000000,
+      growthRate: 26.8
+    },
+    {
+      id: 'professional',
+      name: 'Professional Services',
+      icon: '🧾',
+      category: 'Business',
+      brandCount: 389,
+      status: 'Active',
+      signalStrength: 91.4,
+      brands: generateBrandDetails('professional', 389),
+      operationalData: generateOperationalData(),
+      complianceScore: 93.7,
+      revenue: 4560000000,
+      growthRate: 11.2
+    },
+    {
+      id: 'payroll-mining',
+      name: 'Payroll Mining & Accounting',
+      icon: '🪙',
+      category: 'Financial',
+      brandCount: 267,
+      status: 'Active',
+      signalStrength: 97.2,
+      brands: generateBrandDetails('payroll-mining', 267),
+      operationalData: generateOperationalData(),
+      complianceScore: 98.4,
+      revenue: 3890000000,
+      growthRate: 19.8
+    }
   ];
 
   const [currentStats, setCurrentStats] = useState({
@@ -453,13 +902,76 @@ export default function SeedwaveAdminPortal() {
                       </div>
                     </div>
                     
-                    <div className="mt-6 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg">
-                      <h4 className="font-semibold text-gray-800 mb-2">Brand Snapshot Preview</h4>
-                      <p className="text-sm text-gray-600">
-                        This sector contains {sector.brandCount} active brands with comprehensive operational data, 
-                        real-time metrics, and integrated VaultMesh™ protocols. Signal strength at {sector.signalStrength}% 
-                        indicates optimal connectivity to the Fruitful™ ecosystem.
-                      </p>
+                    <div className="mt-6 space-y-4">
+                      <div className="p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg">
+                        <h4 className="font-semibold text-gray-800 mb-2">Sector Financial Overview</h4>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                          <div>
+                            <div className="text-2xl font-bold text-green-600">${(sector.revenue / 1000000000).toFixed(1)}B</div>
+                            <div className="text-sm text-gray-500">Total Revenue</div>
+                          </div>
+                          <div>
+                            <div className="text-2xl font-bold text-blue-600">{sector.growthRate}%</div>
+                            <div className="text-sm text-gray-500">Growth Rate</div>
+                          </div>
+                          <div>
+                            <div className="text-2xl font-bold text-purple-600">{sector.complianceScore}%</div>
+                            <div className="text-sm text-gray-500">Compliance Score</div>
+                          </div>
+                          <div>
+                            <div className="text-2xl font-bold text-orange-600">{sector.operationalData.uptime}%</div>
+                            <div className="text-sm text-gray-500">System Uptime</div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="p-4 bg-gray-50 rounded-lg">
+                        <h4 className="font-semibold text-gray-800 mb-3">Top Performing Brands</h4>
+                        <div className="space-y-2">
+                          {sector.brands.slice(0, 5).map((brand, idx) => (
+                            <div key={brand.id} className="flex justify-between items-center p-2 bg-white rounded border">
+                              <div>
+                                <div className="font-medium text-sm">{brand.name}</div>
+                                <div className="text-xs text-gray-500">{brand.type} • {brand.location}</div>
+                              </div>
+                              <div className="text-right">
+                                <div className="text-sm font-bold text-green-600">${(brand.revenue / 1000000).toFixed(1)}M</div>
+                                <div className="text-xs text-gray-500">{brand.employees} employees</div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="p-4 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg">
+                        <h4 className="font-semibold text-gray-800 mb-2">Operational Metrics</h4>
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
+                          <div className="flex justify-between">
+                            <span>Throughput:</span>
+                            <span className="font-semibold">{sector.operationalData.throughput.toLocaleString()}/h</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Error Rate:</span>
+                            <span className="font-semibold">{sector.operationalData.errorRate}%</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Latency:</span>
+                            <span className="font-semibold">{sector.operationalData.latency}ms</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Capacity:</span>
+                            <span className="font-semibold">{sector.operationalData.capacity.toLocaleString()}</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Utilization:</span>
+                            <span className="font-semibold">{sector.operationalData.utilization}%</span>
+                          </div>
+                          <div className="flex justify-between">
+                            <span>Maintenance:</span>
+                            <span className="font-semibold">{sector.operationalData.maintenance}</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 ) : null;
