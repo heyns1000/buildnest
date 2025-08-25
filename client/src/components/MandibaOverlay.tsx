@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import MandibaImage from '@assets/Madiba_mock_1756082668111.png';
 
 interface MandibaOverlayProps {
   isVisible: boolean;
@@ -14,8 +15,16 @@ export default function MandibaOverlay({ isVisible, onComplete }: MandibaOverlay
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[9999] bg-black flex items-center justify-center"
-      style={{ backdropFilter: 'blur(10px)' }}
+      className="fixed top-0 left-0 w-full h-full z-[99999] bg-black flex items-center justify-center"
+      style={{ 
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        zIndex: 99999,
+        backgroundColor: '#000000'
+      }}
     >
       <motion.div
         initial={{ scale: 0.5, opacity: 0 }}
@@ -30,7 +39,7 @@ export default function MandibaOverlay({ isVisible, onComplete }: MandibaOverlay
           className="mb-8"
         >
           <img 
-            src="@assets/Madiba_mock_1756082668111.png" 
+            src={MandibaImage} 
             alt="MANDIBA"
             className="h-48 md:h-64 mx-auto rounded-lg"
           />
