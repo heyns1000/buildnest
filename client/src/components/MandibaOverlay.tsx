@@ -23,15 +23,18 @@ export default function MandibaOverlay({ isVisible, onComplete }: MandibaOverlay
         transition={{ duration: 1, ease: "easeOut" }}
         className="text-center"
       >
-        <motion.h1
+        <motion.div
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.5, duration: 1 }}
-          className="text-8xl md:text-9xl font-bold text-yellow-400 mb-8"
-          style={{ fontFamily: 'Orbitron, monospace' }}
+          className="mb-8"
         >
-          MANDIBA
-        </motion.h1>
+          <img 
+            src="@assets/monster_omni_core_engines_nodes_demo_1756078341054.html" 
+            alt="MANDIBA"
+            className="h-32 md:h-48 mx-auto"
+          />
+        </motion.div>
         
         <motion.div
           initial={{ scale: 0 }}
