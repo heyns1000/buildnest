@@ -28,11 +28,16 @@ export default function ScrollBackendStatus() {
     let nodeActive = false;
 
     try {
-      // Test Python backend
+      // Test Python backend with shorter timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 1000);
+      
       const pythonResponse = await fetch('http://localhost:3000/health', {
         method: 'GET',
-        signal: AbortSignal.timeout(2000)
+        signal: controller.signal
       });
+      
+      clearTimeout(timeoutId);
       
       if (pythonResponse.ok) {
         pythonActive = true;
@@ -40,16 +45,25 @@ export default function ScrollBackendStatus() {
       } else {
         results.push('❌ Python FastAPI backend: HTTP ERROR');
       }
-    } catch (error) {
-      results.push('❌ Python FastAPI backend: CONNECTION FAILED');
+    } catch (error: any) {
+      if (error.name === 'AbortError') {
+        results.push('❌ Python FastAPI backend: TIMEOUT (Backend not running)');
+      } else {
+        results.push('❌ Python FastAPI backend: CONNECTION FAILED');
+      }
     }
 
     try {
-      // Test Node.js backend
+      // Test Node.js backend with shorter timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 1000);
+      
       const nodeResponse = await fetch('/api/health', {
         method: 'GET',
-        signal: AbortSignal.timeout(2000)
+        signal: controller.signal
       });
+      
+      clearTimeout(timeoutId);
       
       if (nodeResponse.ok) {
         nodeActive = true;
@@ -57,8 +71,12 @@ export default function ScrollBackendStatus() {
       } else {
         results.push('❌ Node.js Express backend: HTTP ERROR');
       }
-    } catch (error) {
-      results.push('❌ Node.js Express backend: CONNECTION FAILED');
+    } catch (error: any) {
+      if (error.name === 'AbortError') {
+        results.push('❌ Node.js Express backend: TIMEOUT');
+      } else {
+        results.push('❌ Node.js Express backend: CONNECTION FAILED');
+      }
     }
 
     setStatus({
@@ -74,7 +92,7 @@ export default function ScrollBackendStatus() {
 
   useEffect(() => {
     checkBackendStatus();
-    const interval = setInterval(checkBackendStatus, 10000); // Check every 10 seconds
+    const interval = setInterval(checkBackendStatus, 15000); // Check every 15 seconds to reduce timeout issues
     return () => clearInterval(interval);
   }, []);
 
