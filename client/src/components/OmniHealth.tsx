@@ -151,15 +151,22 @@ export default function OmniHealth() {
         }));
 
         // Send health data to backend for scroll validation
-        await fetch('/api/health-update', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            overall: newHealthData.overall,
-            timestamp: new Date().toISOString(),
-            scrollBound: true
-          })
-        });
+        try {
+          await fetch('/api/health-update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              overall: newHealthData.overall,
+              timestamp: new Date().toISOString(),
+              scrollBound: true
+            })
+          }).catch(fetchError => {
+            console.warn('Health update fetch failed:', fetchError);
+            return null;
+          });
+        } catch (healthError) {
+          console.warn('Health update error:', healthError);
+        }
 
       } catch (error) {
         console.error('Health monitoring error:', error);
