@@ -25,7 +25,7 @@ export default function AncestorTagHeritagePortal() {
   const [activeTab, setActiveTab] = useState('heritage-portal');
   const [ancestralRecords, setAncestralRecords] = useState<AncestralRecord[]>([]);
   const [filterAncestor, setFilterAncestor] = useState('');
-  const [filterContentType, setFilterContentType] = useState('');
+  const [filterContentType, setFilterContentType] = useState('all');
   const [familyTreeData, setFamilyTreeData] = useState<any[]>([]);
 
   // Demo data for ancestral records
@@ -79,7 +79,7 @@ export default function AncestorTagHeritagePortal() {
 
   const filteredRecords = ancestralRecords.filter(record => {
     const matchesAncestor = !filterAncestor || record.ancestorName.toLowerCase().includes(filterAncestor.toLowerCase());
-    const matchesType = !filterContentType || record.contentType === filterContentType;
+    const matchesType = filterContentType === 'all' || record.contentType === filterContentType;
     return matchesAncestor && matchesType;
   });
 
@@ -147,7 +147,7 @@ export default function AncestorTagHeritagePortal() {
                           <SelectValue placeholder="All Content Types" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="">All Content Types</SelectItem>
+                          <SelectItem value="all">All Content Types</SelectItem>
                           <SelectItem value="Document">Document</SelectItem>
                           <SelectItem value="Oral History">Oral History</SelectItem>
                           <SelectItem value="Ritual Description">Ritual Description</SelectItem>
@@ -158,7 +158,7 @@ export default function AncestorTagHeritagePortal() {
                       <Button 
                         variant="secondary" 
                         className="w-full" 
-                        onClick={() => { setFilterAncestor(''); setFilterContentType(''); }}
+                        onClick={() => { setFilterAncestor(''); setFilterContentType('all'); }}
                         data-testid="clear-filters"
                       >
                         Clear Filters
