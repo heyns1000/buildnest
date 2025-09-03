@@ -12,6 +12,7 @@ import TemporalMotorPanel from '@/components/TemporalMotorPanel';
 import CoreModules from '@/components/CoreModules';
 import PulseSyncComponents from '@/components/PulseSyncComponents';
 import DemoControlPanel from '@/components/DemoControlPanel';
+import AppNavigation from '@/components/AppNavigation';
 
 export default function Dashboard() {
   useEffect(() => {
@@ -44,6 +45,9 @@ export default function Dashboard() {
 
         {/* Demo Control Panel - Real Functional Scenarios */}
         <DemoControlPanel className="mb-8" />
+
+        {/* Scroll-Backed Applications Navigation */}
+        <AppNavigation className="mb-8" />
 
         <SystemStatus />
         <LogicCores />

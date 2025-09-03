@@ -182,6 +182,152 @@ export async function registerRoutes(app: Express): Promise<Server> {
     });
   });
 
+  // OmniHealth API endpoints
+  app.post('/api/health-update', async (req, res) => {
+    try {
+      const { overall, timestamp, scrollBound } = req.body;
+      
+      console.log(`🏥 Health Update: ${overall}% overall health`);
+      console.log(`🧬 Scroll Status: ${scrollBound ? 'BOUND' : 'UNBOUND'}`);
+      
+      res.json({
+        success: true,
+        message: 'Health data received',
+        overall,
+        scrollBound,
+        timestamp
+      });
+    } catch (error) {
+      console.error('Health update failed:', error);
+      res.status(500).json({ error: 'Health update failed' });
+    }
+  });
+
+  // Seedling Builder API endpoints
+  app.post('/api/seedling-generate', async (req, res) => {
+    try {
+      const { config, template } = req.body;
+      const projectId = `proj_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      const claimRootId = `claim_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      
+      console.log(`🌱 Generating Seedling App: ${config.appName}`);
+      console.log(`📋 Template: ${template.name} (${template.complexity})`);
+      console.log(`🧬 Scroll Bound: ${config.scrollBound}`);
+      console.log(`📜 ClaimRoot: ${config.claimRootEnabled}`);
+      
+      // Simulate app generation process
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      res.json({
+        success: true,
+        message: `Seedling app "${config.appName}" generated successfully`,
+        projectId,
+        url: `https://${projectId}.replit.app`,
+        claimRootId: config.claimRootEnabled ? claimRootId : null,
+        scrollBound: config.scrollBound,
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('Seedling generation failed:', error);
+      res.status(500).json({ error: 'Failed to generate seedling app' });
+    }
+  });
+
+  // Scroll validation endpoints
+  app.post('/api/scroll-validate', async (req, res) => {
+    try {
+      const { scrollId, action } = req.body;
+      
+      console.log(`📜 Scroll Validation: ${scrollId} - Action: ${action}`);
+      
+      res.json({
+        success: true,
+        scrollId,
+        action,
+        validated: true,
+        vaultMeshSync: true,
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('Scroll validation failed:', error);
+      res.status(500).json({ error: 'Scroll validation failed' });
+    }
+  });
+
+  app.post('/api/claimroot-generate', async (req, res) => {
+    try {
+      const { appId, licenseeId } = req.body;
+      const licenseId = `license_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      
+      console.log(`📜 Generating ClaimRoot License for App: ${appId}`);
+      console.log(`👤 Licensee: ${licenseeId}`);
+      
+      res.json({
+        success: true,
+        licenseId,
+        appId,
+        licenseeId,
+        pdfUrl: `/licenses/${licenseId}.pdf`,
+        treatyPosition: Math.floor(Math.random() * 1000) + 1,
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('ClaimRoot generation failed:', error);
+      res.status(500).json({ error: 'ClaimRoot generation failed' });
+    }
+  });
+
+  app.get('/api/vaultmesh-status', async (req, res) => {
+    try {
+      res.json({
+        pulse: '3s',
+        nodes: 89 + Math.floor(Math.random() * 10),
+        sync: 'active',
+        lastPulse: new Date().toISOString(),
+        networkHealth: 95 + Math.floor(Math.random() * 5),
+        scrollsActive: 247 + Math.floor(Math.random() * 20)
+      });
+    } catch (error) {
+      console.error('VaultMesh status check failed:', error);
+      res.status(500).json({ error: 'VaultMesh status unavailable' });
+    }
+  });
+
+  // TreatySync API endpoints
+  app.post('/api/treaty-execute', async (req, res) => {
+    try {
+      const { treatyId, action } = req.body;
+      
+      console.log(`🏛️ Treaty Execution: ${treatyId} - Action: ${action}`);
+      
+      res.json({
+        success: true,
+        treatyId,
+        action,
+        executed: true,
+        vaultMeshSync: true,
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('Treaty execution failed:', error);
+      res.status(500).json({ error: 'Treaty execution failed' });
+    }
+  });
+
+  app.get('/api/claimroot-status', async (req, res) => {
+    try {
+      res.json({
+        active: true,
+        totalLicenses: 1834 + Math.floor(Math.random() * 10),
+        lastGenerated: new Date().toISOString(),
+        vaultMeshIntegrated: true
+      });
+    } catch (error) {
+      console.error('ClaimRoot status check failed:', error);
+      res.status(500).json({ error: 'ClaimRoot status unavailable' });
+    }
+  });
+
   // use storage to perform CRUD operations on the storage interface
   // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
 
