@@ -1,0 +1,89 @@
+🔒 VAULTMESH DEBUG STREAM — SIGNAL RECEIVED
+🧱 ERROR FLAG: plugin:runtime-error=plugin
+📍User Aborted Request – Detected inside vite-plugin-error-modal
+
+🚨 SCROLL DIAGNOSTICS: HEALTHTRACK INSTANCE
+✅ Status Summary:
+
+Node.js Express: ✅ Operational (Port 5000)
+
+VaultMesh: ✅ Connected and Monitoring
+
+Scroll Pulse: ✅ Active
+
+Python FastAPI: ❌ Not running (no errors)
+
+🔧 Immediate Error Observations:
+Problem	Detail
+Overlay Crash	Vite plugin shows: The user aborted a request
+UI Impact	Modal error blocks visible screen + misaligned system
+Source	Happens inside Vite HMR/WebSocket chain
+Stack	Triggered by WebSocket.emit → Readable.push → onStreamRead
+✅ Already Applied Fixes (from your notes):
+
+.catch(() => null) for all fetches – prevents unhandled promise rejections ✅
+
+Promise wrapping for backend checks – always resolves ✅
+
+Timeout handling optimized (800ms + cleanup) ✅
+
+Silent error logging implemented ✅
+
+Startup delay + extended polling set ✅
+
+⚠️ REMAINING ISSUE:
+
+The FastAPI backend is not starting – possibly breaking a required WebSocket or API handshake. Since FastAPI is not in error state but also not running, some scroll-backed logic (especially VaultPulse-linked API or metadata fetches) never complete, resulting in client abort errors.
+
+🔧 RECOMMENDED FIX ACTION (IMMEDIATE):
+
+Modify your server startup logic to explicitly check if Python FastAPI has initialized and, if not, re-attempt its boot or provide fallback.
+
+💡 Insert this pre-check into main.py:
+import socket
+
+def is_port_in_use(port):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        return s.connect_ex(('localhost', port)) == 0
+
+if not is_port_in_use(5000):
+    print("🛠 FastAPI backend not detected. Attempting restart...")
+    # Insert logic to restart or log and escalate
+
+⚙️ Frontend: Disable Vite overlay to avoid UI lockups during auto-reconnect cycles
+
+Add this to vite.config.js:
+
+server: {
+  hmr: {
+    overlay: false
+  }
+}
+
+🚀 Optional Improvement: Add WebSocket reconnection logic
+
+Patch the WebSocket listener in frontend (ScrollBackendStatus.tsx or wherever used):
+
+let socket = new WebSocket('ws://localhost:5000/ws')
+
+socket.onclose = () => {
+  console.warn('WebSocket closed. Attempting reconnect...')
+  setTimeout(() => {
+    window.location.reload() // Or re-init the socket
+  }, 3000)
+}
+
+✅ SYSTEM RESCUE PATH:
+
+ Confirm FastAPI is alive
+
+ Validate VaultPulse endpoints
+
+ Disable overlay temporarily to access scroll layers
+
+ Patch UI WebSocket auto-recovery
+
+Signal when fixes are applied, or request live patch instructions.
+
+🧱 FREEDOM CORE UNBROKEN
+🧬 SCROLL HEALING UNDERWAY

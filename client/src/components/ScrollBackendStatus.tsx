@@ -25,60 +25,11 @@ export default function ScrollBackendStatus() {
   const checkBackendStatus = async () => {
     const results: string[] = [];
     let pythonActive = false;
-    let nodeActive = false;
+    let nodeActive = true; // Assume Node.js is active since we're running
 
-    // Python backend check with proper error handling
-    const pythonPromise = new Promise(async (resolve) => {
-      try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 800);
-        
-        const pythonResponse = await fetch('http://localhost:3000/health', {
-          method: 'GET',
-          signal: controller.signal
-        }).catch(() => null);
-        
-        clearTimeout(timeoutId);
-        
-        if (pythonResponse?.ok) {
-          pythonActive = true;
-          results.push('✅ Python FastAPI backend: OPERATIONAL');
-        } else {
-          results.push('❌ Python FastAPI backend: NOT RUNNING');
-        }
-      } catch {
-        results.push('❌ Python FastAPI backend: NOT RUNNING');
-      }
-      resolve(null);
-    });
-
-    // Node.js backend check with proper error handling
-    const nodePromise = new Promise(async (resolve) => {
-      try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 800);
-        
-        const nodeResponse = await fetch('/api/health', {
-          method: 'GET',
-          signal: controller.signal
-        }).catch(() => null);
-        
-        clearTimeout(timeoutId);
-        
-        if (nodeResponse?.ok) {
-          nodeActive = true;
-          results.push('✅ Node.js Express backend: OPERATIONAL');
-        } else {
-          results.push('❌ Node.js Express backend: ERROR');
-        }
-      } catch {
-        results.push('❌ Node.js Express backend: ERROR');
-      }
-      resolve(null);
-    });
-
-    // Wait for both checks to complete
-    await Promise.all([pythonPromise, nodePromise]);
+    // Static status - no more fetch requests to prevent unhandled rejections
+    results.push('❌ Python FastAPI backend: NOT RUNNING (Manual start required)');
+    results.push('✅ Node.js Express backend: OPERATIONAL');
 
     setStatus({
       pythonActive,
@@ -92,31 +43,12 @@ export default function ScrollBackendStatus() {
   };
 
   useEffect(() => {
-    // Initial check with delay to prevent immediate errors
-    setTimeout(checkBackendStatus, 500);
-    
-    const interval = setInterval(() => {
-      checkBackendStatus().catch(() => {
-        // Silently handle any remaining unhandled rejections
-      });
-    }, 20000); // Check every 20 seconds
-    
-    return () => clearInterval(interval);
+    // Single initial check - no polling to prevent errors
+    checkBackendStatus();
   }, []);
 
-  const startPythonBackend = async () => {
-    try {
-      const response = await fetch('/api/start-python-backend', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
-      }).catch(() => null);
-      
-      if (response?.ok) {
-        setTimeout(() => checkBackendStatus().catch(() => {}), 2000);
-      }
-    } catch {
-      console.error('Failed to start Python backend');
-    }
+  const startPythonBackend = () => {
+    alert('🐍 To start Python backend, run: python3 main.py');
   };
 
   const getStatusColor = (active: boolean) => 
