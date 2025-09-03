@@ -27,57 +27,58 @@ export default function ScrollBackendStatus() {
     let pythonActive = false;
     let nodeActive = false;
 
-    try {
-      // Test Python backend with shorter timeout
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 1000);
-      
-      const pythonResponse = await fetch('http://localhost:3000/health', {
-        method: 'GET',
-        signal: controller.signal
-      });
-      
-      clearTimeout(timeoutId);
-      
-      if (pythonResponse.ok) {
-        pythonActive = true;
-        results.push('✅ Python FastAPI backend: OPERATIONAL');
-      } else {
-        results.push('❌ Python FastAPI backend: HTTP ERROR');
+    // Python backend check with proper error handling
+    const pythonPromise = new Promise(async (resolve) => {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 800);
+        
+        const pythonResponse = await fetch('http://localhost:3000/health', {
+          method: 'GET',
+          signal: controller.signal
+        }).catch(() => null);
+        
+        clearTimeout(timeoutId);
+        
+        if (pythonResponse?.ok) {
+          pythonActive = true;
+          results.push('✅ Python FastAPI backend: OPERATIONAL');
+        } else {
+          results.push('❌ Python FastAPI backend: NOT RUNNING');
+        }
+      } catch {
+        results.push('❌ Python FastAPI backend: NOT RUNNING');
       }
-    } catch (error: any) {
-      if (error.name === 'AbortError') {
-        results.push('❌ Python FastAPI backend: TIMEOUT (Backend not running)');
-      } else {
-        results.push('❌ Python FastAPI backend: CONNECTION FAILED');
-      }
-    }
+      resolve(null);
+    });
 
-    try {
-      // Test Node.js backend with shorter timeout
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 1000);
-      
-      const nodeResponse = await fetch('/api/health', {
-        method: 'GET',
-        signal: controller.signal
-      });
-      
-      clearTimeout(timeoutId);
-      
-      if (nodeResponse.ok) {
-        nodeActive = true;
-        results.push('✅ Node.js Express backend: OPERATIONAL');
-      } else {
-        results.push('❌ Node.js Express backend: HTTP ERROR');
+    // Node.js backend check with proper error handling
+    const nodePromise = new Promise(async (resolve) => {
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 800);
+        
+        const nodeResponse = await fetch('/api/health', {
+          method: 'GET',
+          signal: controller.signal
+        }).catch(() => null);
+        
+        clearTimeout(timeoutId);
+        
+        if (nodeResponse?.ok) {
+          nodeActive = true;
+          results.push('✅ Node.js Express backend: OPERATIONAL');
+        } else {
+          results.push('❌ Node.js Express backend: ERROR');
+        }
+      } catch {
+        results.push('❌ Node.js Express backend: ERROR');
       }
-    } catch (error: any) {
-      if (error.name === 'AbortError') {
-        results.push('❌ Node.js Express backend: TIMEOUT');
-      } else {
-        results.push('❌ Node.js Express backend: CONNECTION FAILED');
-      }
-    }
+      resolve(null);
+    });
+
+    // Wait for both checks to complete
+    await Promise.all([pythonPromise, nodePromise]);
 
     setStatus({
       pythonActive,
@@ -91,8 +92,15 @@ export default function ScrollBackendStatus() {
   };
 
   useEffect(() => {
-    checkBackendStatus();
-    const interval = setInterval(checkBackendStatus, 15000); // Check every 15 seconds to reduce timeout issues
+    // Initial check with delay to prevent immediate errors
+    setTimeout(checkBackendStatus, 500);
+    
+    const interval = setInterval(() => {
+      checkBackendStatus().catch(() => {
+        // Silently handle any remaining unhandled rejections
+      });
+    }, 20000); // Check every 20 seconds
+    
     return () => clearInterval(interval);
   }, []);
 
@@ -101,13 +109,13 @@ export default function ScrollBackendStatus() {
       const response = await fetch('/api/start-python-backend', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
-      });
+      }).catch(() => null);
       
-      if (response.ok) {
-        setTimeout(checkBackendStatus, 2000); // Check status after 2 seconds
+      if (response?.ok) {
+        setTimeout(() => checkBackendStatus().catch(() => {}), 2000);
       }
-    } catch (error) {
-      console.error('Failed to start Python backend:', error);
+    } catch {
+      console.error('Failed to start Python backend');
     }
   };
 
