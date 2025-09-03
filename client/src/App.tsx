@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Dashboard from "@/pages/dashboard";
 import NotFound from "@/pages/not-found";
-import MandibaOverlay from "@/components/MandibaOverlay";
+import EngineEntry from "@/components/EngineEntry";
 import { useState } from "react";
 
 function Router() {
@@ -18,15 +18,15 @@ function Router() {
 }
 
 function App() {
-  const [showMandiba, setShowMandiba] = useState(true);
+  const [showEngineEntry, setShowEngineEntry] = useState(true);
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <MandibaOverlay 
-          isVisible={showMandiba} 
-          onComplete={() => setShowMandiba(false)} 
+        <EngineEntry 
+          isVisible={showEngineEntry} 
+          onComplete={() => setShowEngineEntry(false)} 
         />
         <Router />
       </TooltipProvider>
