@@ -51,6 +51,14 @@ const navigationItems: NavItem[] = [
     description: 'FAA Admin system for treaty logs and governance',
     scrollBound: true,
     status: 'beta'
+  },
+  {
+    path: '/voorwaard-mars',
+    name: 'VOORWAARD MARS',
+    icon: '🌍',
+    description: 'Planetary motion protocol and conditional trigger system',
+    scrollBound: true,
+    status: 'new'
   }
 ];
 
