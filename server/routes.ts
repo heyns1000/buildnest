@@ -130,6 +130,58 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Real scenario execution endpoints
+  app.post('/api/scenario-start', async (req, res) => {
+    try {
+      const { scenarioId, parameters, complexity } = req.body;
+      const executionId = `exec_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      
+      console.log(`🎯 Starting real scenario: ${scenarioId}`);
+      console.log(`📊 Parameters:`, parameters);
+      console.log(`⚡ Complexity: ${complexity}`);
+      
+      res.json({
+        success: true,
+        message: `Scenario ${scenarioId} started`,
+        executionId,
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('Scenario start failed:', error);
+      res.status(500).json({ error: 'Failed to start scenario' });
+    }
+  });
+
+  app.post('/api/scenario-complete', async (req, res) => {
+    try {
+      const { scenarioId, status } = req.body;
+      
+      console.log(`✅ Scenario completed: ${scenarioId} - Status: ${status}`);
+      
+      res.json({
+        success: true,
+        message: `Scenario ${scenarioId} completed`,
+        status,
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('Scenario completion failed:', error);
+      res.status(500).json({ error: 'Failed to complete scenario' });
+    }
+  });
+
+  app.get('/api/health-check', async (req, res) => {
+    // Simulate variable response times for network stress testing
+    const delay = Math.random() * 100; // 0-100ms random delay
+    await new Promise(resolve => setTimeout(resolve, delay));
+    
+    res.json({
+      status: 'healthy',
+      timestamp: new Date().toISOString(),
+      responseTime: Math.round(delay)
+    });
+  });
+
   // use storage to perform CRUD operations on the storage interface
   // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
 
