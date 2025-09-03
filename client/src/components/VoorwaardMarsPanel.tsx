@@ -50,20 +50,16 @@ export default function VoorwaardMarsPanel() {
   useEffect(() => {
     const fetchScrollPulse = async () => {
       try {
-        // Try Python backend first, fallback to Node.js
-        let response;
-        try {
-          response = await fetch('http://localhost:3000/api/scroll/pulse');
-        } catch {
-          response = await fetch('/api/scroll-pulse');
-        }
-        
+        const response = await fetch('/api/scroll-pulse');
         if (response.ok) {
           const data = await response.json();
           setScrollPulseData(data.pulse || data);
+        } else {
+          setScrollPulseData({ status: 'Unavailable', interval: '9s' });
         }
       } catch (error) {
         console.error('Scroll pulse fetch failed:', error);
+        setScrollPulseData({ status: 'Offline', interval: '9s' });
       }
     };
 
@@ -82,26 +78,12 @@ export default function VoorwaardMarsPanel() {
     setIntakeInProgress(true);
 
     try {
-      // Try Python backend first (port 3000), fallback to Node.js backend
-      let response;
-      try {
-        response = await fetch('http://localhost:3000/api/treaty-sync/intake', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            app_concept: intakeForm.appConcept,
-            funding_declaration: intakeForm.fundingDeclaration,
-            scroll_compliance: intakeForm.scrollCompliance
-          })
-        });
-      } catch {
-        // Fallback to Node.js backend
-        response = await fetch('/api/seedling/intake', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(intakeForm)
-        });
-      }
+      // Use Node.js backend for treaty sync intake
+      const response = await fetch('/api/seedling/intake', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(intakeForm)
+      });
 
       const result = await response.json();
 
