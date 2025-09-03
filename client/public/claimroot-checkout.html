@@ -3,62 +3,82 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ClaimRoot Checkout – VaultLevel 7</title>
+  <title>ClaimRoot Checkout - CodeFlow</title>
+
+  <!-- PayPal SDK Script for Hosted Buttons -->
+  <script 
+    src="https://www.paypal.com/sdk/js?client-id=BAAGdPecRsf6dw_nIrWqUen0GdW0UsBZapp1Gn62xkPdD-Vqc-4lqWAidKK8LOObXux8pHJGjXknZoar6Q&components=hosted-buttons&disable-funding=venmo&currency=USD">
+  </script>
+
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #0e1726;
-      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0f172a;
+      color: #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       padding: 2rem;
     }
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
-      background: #1c2738;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 30px rgba(0, 255, 170, 0.15);
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
-    h1, h2 {
-      color: #72f5c0;
-    }
-    code {
-      background: #111;
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
-      display: inline-block;
-      margin-top: 0.5rem;
-    }
-    #paypal-container-K9BPET82JDRQ4 {
-      margin-top: 1.5rem;
-    }
-    .log {
-      font-size: 0.85rem;
-      margin-top: 1rem;
-      background: #222;
+    .vault-log {
+      background: #1e293b;
       padding: 1rem;
-      border-radius: 8px;
+      border-radius: 0.5rem;
+      max-width: 600px;
+      margin-top: 1.5rem;
+      font-family: monospace;
+      color: #00ffae;
       max-height: 300px;
       overflow-y: auto;
     }
-    .success { color: #72f5c0; }
+    .paypal-button-container {
+      margin: 2rem 0;
+    }
+    .pp-K9BPET82JDRQ4 {
+      text-align: center;
+      border: none;
+      border-radius: 0.25rem;
+      min-width: 11.625rem;
+      padding: 0 2rem;
+      height: 2.625rem;
+      font-weight: bold;
+      background-color: #FFD140;
+      color: #000000;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-size: 1rem;
+      line-height: 1.25rem;
+      cursor: pointer;
+    }
+    .success { color: #00ffae; }
     .error { color: #ff6b6b; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🧬 ClaimRoot License – CodeFlow Checkout</h1>
-    <h2>💳 Secure PayPal Hosted Button</h2>
-    <div id="paypal-container-K9BPET82JDRQ4"></div>
+  <h1>🧬 ClaimRoot License &mdash; CodeFlow Checkout</h1>
 
-    <h2>🔐 VaultLevel 7 Verification Log</h2>
-    <div class="log" id="logBox">
-      <p>Initializing VaultMesh & TreatyFlame...</p>
-    </div>
+  <!-- Hosted PayPal Button -->
+  <div class="paypal-button-container">
+    <div id="paypal-container-K9BPET82JDRQ4"></div>
   </div>
 
-  <!-- PayPal Script -->
-  <script src="https://www.paypal.com/sdk/js?client-id=BAAGdPecRsf6dw_nIrWqUen0GdW0UsBZapp1Gn62xkPdD-Vqc-4lqWAidKK8LOObXux8pHJGjXknZoar6Q&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
+  <!-- Styled Single Button -->
+  <form action="https://www.paypal.com/ncp/payment/K9BPET82JDRQ4" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+    <input class="pp-K9BPET82JDRQ4" type="submit" value="Buy Now" />
+    <img src="https://www.paypalobjects.com/images/Debit_Credit_APM.svg" alt="cards" />
+    <section style="font-size: 0.75rem;">
+      Powered by <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;" />
+    </section>
+  </form>
+
+  <!-- VaultLevel 7 Verification Log -->
+  <div class="vault-log" id="logBox">
+    Initializing VaultMesh & TreatyFlame...<br/>
+  </div>
+
   <script>
     paypal.HostedButtons({
       hostedButtonId: "K9BPET82JDRQ4",
@@ -70,12 +90,12 @@
     const logBox = document.getElementById("logBox");
 
     function log(message) {
-      logBox.innerHTML += `<p class="success">✅ ${message}</p>`;
+      logBox.innerHTML += `✅ ${message}<br/>`;
       logBox.scrollTop = logBox.scrollHeight;
     }
     
     function error(message) {
-      logBox.innerHTML += `<p class="error">❌ ${message}</p>`;
+      logBox.innerHTML += `<span class="error">❌ ${message}</span><br/>`;
       logBox.scrollTop = logBox.scrollHeight;
     }
 
@@ -89,9 +109,9 @@
         .then(res => res.json())
         .then(data => {
           if (data.success) {
-            log(`VaultMesh Pulse Active - Health: ${data.vaultMesh.healthScore}%`);
-            log(`Quantum Signature: ${data.vaultMesh.quantumSignature}`);
-            log(`Active Connections: ${data.vaultMesh.vaultConnections}`);
+            log(`Scroll Validated ("success": true)`);
+            log(`Checkout Verified — VaultLevel 7`);
+            log(`VaultMesh Pulse: {"brand_count":${data.vaultMesh.scrollsValidated},"platform_health":"OPERATIONAL","pulse_interval":"${data.vaultMesh.pulseInterval}","vault_status":"SEALED"}`);
           } else {
             error("VaultMesh pulse validation failed");
           }
@@ -108,10 +128,9 @@
           .then(res => res.json())
           .then(data => {
             if (data.success) {
-              log("Scroll Validation Complete ✅");
-              log(`Digital Signature: ${data.validation.digitalSignature}`);
-              log("ClaimRoot License: VERIFIED");
-              log("VaultLevel 7 Checkout: READY FOR PAYMENT");
+              log(`TreatyFlame Ignited — Digital Signature: ${data.validation.digitalSignature}`);
+              log("ClaimRoot License: VERIFIED & TREATY-BOUND");
+              log("🧬 VaultLevel 7 Checkout: READY FOR PAYMENT");
             } else {
               error("Scroll validation failed");
             }
