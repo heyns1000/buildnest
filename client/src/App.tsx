@@ -9,6 +9,7 @@ import SeedlingPage from "@/pages/seedling";
 import ScrollExplainerPage from "@/pages/scroll-explainer";
 import TreatySyncPage from "@/pages/treaty-sync";
 import VoorwaardMarsPage from "@/pages/voorwaard-mars";
+import SeedwaveDeploymentPage from "@/pages/seedwave-deployment";
 import NotFound from "@/pages/not-found";
 import EngineEntry from "@/components/EngineEntry";
 import { useState } from "react";
@@ -22,6 +23,7 @@ function Router() {
       <Route path="/scroll-explainer" component={ScrollExplainerPage} />
       <Route path="/treaty-sync" component={TreatySyncPage} />
       <Route path="/voorwaard-mars" component={VoorwaardMarsPage} />
+      <Route path="/seedwave-deployment" component={SeedwaveDeploymentPage} />
       <Route component={NotFound} />
     </Switch>
   );

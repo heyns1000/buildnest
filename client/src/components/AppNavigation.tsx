@@ -59,6 +59,14 @@ const navigationItems: NavItem[] = [
     description: 'Planetary motion protocol and conditional trigger system',
     scrollBound: true,
     status: 'new'
+  },
+  {
+    path: '/seedwave-deployment',
+    name: 'Seedwave Deployment',
+    icon: '🚀',
+    description: 'Scroll-based app deployment with VaultMesh and OmniGrid',
+    scrollBound: true,
+    status: 'new'
   }
 ];
 
