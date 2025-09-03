@@ -13,6 +13,7 @@ import CoreModules from '@/components/CoreModules';
 import PulseSyncComponents from '@/components/PulseSyncComponents';
 import DemoControlPanel from '@/components/DemoControlPanel';
 import AppNavigation from '@/components/AppNavigation';
+import ScrollBackendStatus from '@/components/ScrollBackendStatus';
 
 export default function Dashboard() {
   useEffect(() => {
@@ -48,6 +49,9 @@ export default function Dashboard() {
 
         {/* Scroll-Backed Applications Navigation */}
         <AppNavigation className="mb-8" />
+
+        {/* Scroll Backend Status */}
+        <ScrollBackendStatus />
 
         <SystemStatus />
         <LogicCores />

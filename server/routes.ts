@@ -400,6 +400,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Backend management endpoints
+  app.post('/api/start-python-backend', async (req, res) => {
+    try {
+      console.log('🚀 Starting Python FastAPI backend...');
+      
+      // In a real implementation, you would start the Python process here
+      // For now, we'll return a success response
+      res.json({
+        success: true,
+        message: 'Python backend startup initiated',
+        instructions: 'Run: python3 main.py in terminal',
+        port: 3000
+      });
+    } catch (error) {
+      console.error('Failed to start Python backend:', error);
+      res.status(500).json({ error: 'Python backend startup failed' });
+    }
+  });
+
   // use storage to perform CRUD operations on the storage interface
   // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
 

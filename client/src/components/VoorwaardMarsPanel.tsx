@@ -50,10 +50,17 @@ export default function VoorwaardMarsPanel() {
   useEffect(() => {
     const fetchScrollPulse = async () => {
       try {
-        const response = await fetch('/api/scroll-pulse');
+        // Try Python backend first, fallback to Node.js
+        let response;
+        try {
+          response = await fetch('http://localhost:3000/api/scroll/pulse');
+        } catch {
+          response = await fetch('/api/scroll-pulse');
+        }
+        
         if (response.ok) {
           const data = await response.json();
-          setScrollPulseData(data.pulse);
+          setScrollPulseData(data.pulse || data);
         }
       } catch (error) {
         console.error('Scroll pulse fetch failed:', error);
@@ -75,20 +82,35 @@ export default function VoorwaardMarsPanel() {
     setIntakeInProgress(true);
 
     try {
-      const response = await fetch('/api/seedling/intake', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(intakeForm)
-      });
+      // Try Python backend first (port 3000), fallback to Node.js backend
+      let response;
+      try {
+        response = await fetch('http://localhost:3000/api/treaty-sync/intake', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            app_concept: intakeForm.appConcept,
+            funding_declaration: intakeForm.fundingDeclaration,
+            scroll_compliance: intakeForm.scrollCompliance
+          })
+        });
+      } catch {
+        // Fallback to Node.js backend
+        response = await fetch('/api/seedling/intake', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(intakeForm)
+        });
+      }
 
       const result = await response.json();
 
       if (response.ok) {
         setIntakeResults(prev => [result, ...prev]);
         setIntakeForm(prev => ({ ...prev, appConcept: '' }));
-        alert(`🌍 VOORWAARD MARS: Planetary motion authorized! Intake ID: ${result.intakeId}`);
+        alert(`🌍 VOORWAARD MARS: Planetary motion authorized! Scroll ID: ${result.scroll_id || result.intakeId}`);
       } else {
-        alert(`❌ Intake failed: ${result.error}`);
+        alert(`❌ Intake failed: ${result.error || result.detail}`);
       }
     } catch (error) {
       alert(`❌ Network error: ${error}`);
