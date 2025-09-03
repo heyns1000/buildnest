@@ -104,6 +104,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Demo scenario update endpoint
+  app.post('/api/scenario-update', async (req, res) => {
+    try {
+      const { scenario, step, metrics } = req.body;
+      
+      console.log(`🎮 Demo Scenario Update: ${scenario} - Step ${step}`);
+      if (metrics) {
+        console.log('📊 Metrics Update:', metrics);
+      }
+      
+      // Here you could update real system metrics, trigger alerts, etc.
+      // For now, we'll just acknowledge the update
+      
+      res.json({
+        success: true,
+        message: 'Scenario metrics updated',
+        scenario,
+        step,
+        timestamp: new Date().toISOString()
+      });
+    } catch (error) {
+      console.error('Scenario update failed:', error);
+      res.status(500).json({ error: 'Scenario update failed' });
+    }
+  });
+
   // use storage to perform CRUD operations on the storage interface
   // e.g. storage.insertUser(user) or storage.getUserByUsername(username)
 

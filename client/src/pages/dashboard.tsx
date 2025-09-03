@@ -11,6 +11,7 @@ import FusionMotorPanel from '@/components/FusionMotorPanel';
 import TemporalMotorPanel from '@/components/TemporalMotorPanel';
 import CoreModules from '@/components/CoreModules';
 import PulseSyncComponents from '@/components/PulseSyncComponents';
+import DemoControlPanel from '@/components/DemoControlPanel';
 
 export default function Dashboard() {
   useEffect(() => {
@@ -40,6 +41,9 @@ export default function Dashboard() {
 
         {/* Pulse Sync Components */}
         <PulseSyncComponents className="mb-8" />
+
+        {/* Demo Control Panel - Real Functional Scenarios */}
+        <DemoControlPanel className="mb-8" />
 
         <SystemStatus />
         <LogicCores />
