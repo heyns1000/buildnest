@@ -1,5 +1,4 @@
-\documentclass[10pt, a4paper]{article}
-\usepackage[utf8]{inputenc}
+\documentclass[10pt, a4paper]{article}  Ó´®´\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[a4paper, top=2.0cm, bottom=2.0cm, left=1.8cm, right=1.8cm]{geometry}
 \usepackage{amsmath}
