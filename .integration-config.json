@@ -1,0 +1,177 @@
+{
+  "name": "BuildNest Integration Hub",
+  "version": "2.0.0",
+  "description": "FAA.zone™ MONSTER OMNI™ System - Integration configuration for Hotstack and CodeNest repositories",
+  "architecture": "Fractal Trinity Cosmology",
+  "repositories": {
+    "buildnest": {
+      "owner": "heyns1000",
+      "name": "buildnest",
+      "role": "Core of Planet / MONSTER OMNI™",
+      "protocol": "Gorilla Comb Logic, VaultMesh Pulse (9s)",
+      "description": "Chaos processing, Scroll signing, and synchronization heartbeat",
+      "url": "https://github.com/heyns1000/buildnest"
+    },
+    "hotstack": {
+      "owner": "heyns1000",
+      "name": "hotstack",
+      "role": "First Man on Mars / HIL",
+      "protocol": "Zero-Signup, Omnidrop, Collapse",
+      "description": "User interface, intake, and autonomous trigger generation",
+      "url": "https://github.com/heyns1000/hotstack",
+      "template": "https://samfox.faa.zone/global_templates/hotstack_vs2.0.html",
+      "landingPage": "hotstack.faa.zone"
+    },
+    "codenest": {
+      "owner": "heyns1000",
+      "name": "codenest",
+      "role": "Development Dashboard",
+      "protocol": "Project Management & API Gateway",
+      "description": "Project management, API keys, templates, and deployment interface",
+      "url": "https://github.com/heyns1000/codenest"
+    }
+  },
+  "integrationPoints": {
+    "hotstackDeployment": {
+      "component": "client/src/components/HotStackDeployment.tsx",
+      "deployTarget": "hotstack",
+      "features": [
+        "Omnidrop Protocol (180-second window)",
+        "Drag & Drop HTML/PDF upload",
+        "6-step deployment pipeline",
+        "DNS hook activation",
+        "MeshNest™ integration",
+        "ClaimRoot™ verification"
+      ]
+    },
+    "codenestDashboard": {
+      "component": "client/src/components/CodeNestDashboard.tsx",
+      "deployTarget": "codenest",
+      "features": [
+        "Project management",
+        "API key generation",
+        "Template library",
+        "Code editor",
+        "Multi-company management",
+        "Real-time deployment metrics"
+      ]
+    }
+  },
+  "buildTargets": {
+    "hotstack": {
+      "entry": "client/src/components/HotStackDeployment.tsx",
+      "outputDir": "dist/hotstack",
+      "publicPath": "/",
+      "template": "attached_assets/hotstack_1756076943625.html",
+      "deployCommand": "npm run build:hotstack",
+      "globalTemplate": "https://samfox.faa.zone/global_templates/hotstack_vs2.0.html"
+    },
+    "codenest": {
+      "entry": "client/src/components/CodeNestDashboard.tsx",
+      "outputDir": "dist/codenest",
+      "publicPath": "/",
+      "deployCommand": "npm run build:codenest"
+    },
+    "buildnest": {
+      "entry": "client/src/main.tsx",
+      "outputDir": "dist",
+      "publicPath": "/",
+      "deployCommand": "npm run build"
+    }
+  },
+  "protocols": {
+    "VaultMeshPulse": {
+      "interval": 9,
+      "unit": "seconds",
+      "description": "High-frequency synchronization heartbeat across all systems"
+    },
+    "ScrollStack": {
+      "enabled": true,
+      "description": "Core scroll signing and validation"
+    },
+    "TreatySync": {
+      "enabled": true,
+      "description": "Centralized management of brands and license contracts"
+    },
+    "ClaimRoot": {
+      "enabled": true,
+      "description": "Secure, traceable site ownership verification"
+    },
+    "Omnidrop": {
+      "enabled": true,
+      "window": 180,
+      "unit": "seconds",
+      "description": "Rapid deployment protocol for instant site activation"
+    }
+  },
+  "deploymentStrategy": {
+    "type": "sovereign-compute",
+    "platform": "DigitalOcean",
+    "orchestrator": "Coolify",
+    "infrastructure": {
+      "nodes": 4,
+      "type": "s-2vcpu-4gb",
+      "region": "nyc3",
+      "costPerMonth": 60,
+      "savingsAnnual": 16740
+    }
+  },
+  "brandEcosystem": {
+    "totalBrands": 7038,
+    "sectors": 29,
+    "treatyNodes": 247,
+    "claimrootLicenses": 1834,
+    "companies": [
+      {
+        "id": "faa",
+        "name": "FAA.zone™",
+        "logo": "🌱",
+        "description": "Primary global entity"
+      },
+      {
+        "id": "fruitful",
+        "name": "Fruitful Global",
+        "logo": "🍎",
+        "description": "Innovation division"
+      },
+      {
+        "id": "vaultmesh",
+        "name": "VaultMesh™",
+        "logo": "🔐",
+        "description": "Security protocols"
+      },
+      {
+        "id": "banimal",
+        "name": "Banimal™",
+        "logo": "🦍",
+        "description": "Creative platform"
+      }
+    ]
+  },
+  "apiEndpoints": {
+    "scroll": [
+      "/api/scroll-status",
+      "/api/scroll-validate",
+      "/api/scroll-pulse"
+    ],
+    "vaultmesh": [
+      "/api/vaultmesh-status",
+      "/api/vaultmesh/pulse-sync/:appId"
+    ],
+    "deployment": [
+      "/api/faa/intake/create",
+      "/api/seedling/intake",
+      "/api/seedling-generate"
+    ],
+    "protocols": [
+      "/api/register-app",
+      "/api/validate-build",
+      "/api/wash-metadata"
+    ]
+  },
+  "healthChecks": {
+    "node": "http://localhost:5000/api/health-check",
+    "python": "http://localhost:3000/health",
+    "database": "postgresql://buildnest@localhost:5432/buildnest"
+  }
+}
