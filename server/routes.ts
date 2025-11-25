@@ -5,6 +5,7 @@ import preBuildCheck from "../protocols/LaundroAI/pre-build-check";
 import metadataWasher from "../protocols/OmniGrid/metadata-washer";
 import { registerRealDataRoutes } from "./real-data-routes";
 import { registerInfrastructureRoutes } from "./infrastructure-routes";
+import { registerLicenseRoutes } from "./license-routes";
 import "./types"; // Import extended types
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -716,6 +717,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Register Infrastructure API routes for DNS, email, and domain management
   registerInfrastructureRoutes(app);
+
+  // Register License Management API routes for ClaimRoot™ and LicenseVault™
+  registerLicenseRoutes(app);
 
   const httpServer = createServer(app);
 

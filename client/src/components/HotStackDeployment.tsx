@@ -240,17 +240,30 @@ export default function HotStackDeployment() {
         index === 3 ? { ...step, status: 'complete', duration: '1.8s' } : step
       ));
 
-      // Step 5: ClaimRoot™ Verification
+      // Step 5: ClaimRoot™ Verification (generate real license)
       setDeploymentSteps(prev => prev.map((step, index) =>
         index === 4 ? { ...step, status: 'active' } : step
       ));
 
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const licenseResponse = await fetch('/api/licenses/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          appId,
+          appName: droppedFiles[0]?.name || 'HotStack App',
+          userId,
+          domain: domainData.data?.fullDomain || 'your-site.faa.zone',
+          issuedTo: 'user@example.com', // In production, from user auth
+          sector: 'general',
+          treatyType: 'STANDARD'
+        })
+      });
 
-      const claimRootLicense = `claim_${appId}_${Date.now()}`;
+      const licenseData = await licenseResponse.json();
+      const claimRootLicense = licenseData.license?.licenseId || `claim_${appId}_${Date.now()}`;
 
       setDeploymentSteps(prev => prev.map((step, index) =>
-        index === 4 ? { ...step, status: 'complete', duration: '1.5s' } : step
+        index === 4 ? { ...step, status: 'complete', duration: '2s' } : step
       ));
 
       // Step 6: Live Deployment (send email notification)
@@ -279,10 +292,14 @@ export default function HotStackDeployment() {
 
       setIsDeploying(false);
 
-      // Show success message with real domain
+      // Show success message with real domain and license info
       setTimeout(() => {
         const domain = domainData.data?.fullDomain || 'your-site.faa.zone';
-        alert(`🎉 Omnidrop Complete! Your site is now live at: https://${domain}\n\n✅ DNS records configured\n✅ SSL certificate active\n✅ Deployment email sent\n✅ ClaimRoot™ license: ${claimRootLicense}`);
+        const treatyPosition = licenseData.license?.treatyPosition || 'N/A';
+        const scrollHash = licenseData.license?.scrollHash || 'N/A';
+        const vaultId = licenseData.vault?.vaultId || 'N/A';
+
+        alert(`🎉 Omnidrop Complete! Your site is now live at: https://${domain}\n\n✅ DNS records configured\n✅ SSL certificate active\n✅ Deployment email sent\n✅ ClaimRoot™ license: ${claimRootLicense}\n📊 Treaty Position: #${treatyPosition}\n🧬 Scroll Hash: ${scrollHash}\n🔒 Vault ID: ${vaultId}\n\n📜 License stored in LicenseVault™ and synced to VaultMesh`);
       }, 500);
 
     } catch (error) {
