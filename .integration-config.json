@@ -30,6 +30,24 @@
       "description": "Project management, API keys, templates, and deployment interface",
       "url": "https://github.com/heyns1000/codenest"
     },
+    "fruitful": {
+      "owner": "heyns1000",
+      "name": "fruitful",
+      "role": "Corporate Landing / Brand Hub",
+      "protocol": "Fruitful Global Brand Experience",
+      "description": "Main corporate landing page for Fruitful Global - unchanged HTML preserved",
+      "url": "https://github.com/heyns1000/fruitful",
+      "landingPage": "fruitful.faa.zone",
+      "htmlSource": "attached_assets/index_1756076860974.html",
+      "preserveOriginal": true,
+      "features": [
+        "Corporate branding and identity",
+        "Fruitful Innovations showcase",
+        "Multi-sector navigation",
+        "Global footer with treaty links",
+        "Responsive design with dark theme"
+      ]
+    },
     "fruitfulplanetchange": {
       "owner": "fruitful-global-planet",
       "name": "fruitfulplanetchange",
@@ -87,6 +105,15 @@
       "outputDir": "dist/codenest",
       "publicPath": "/",
       "deployCommand": "npm run build:codenest"
+    },
+    "fruitful": {
+      "entry": "static",
+      "outputDir": "dist/fruitful",
+      "publicPath": "/",
+      "htmlSource": "attached_assets/index_1756076860974.html",
+      "deployCommand": "npm run build:fruitful",
+      "preserveOriginal": true,
+      "note": "Fruitful landing page HTML is copied unchanged - no build transformation"
     },
     "buildnest": {
       "entry": "client/src/main.tsx",

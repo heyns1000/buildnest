@@ -61,6 +61,22 @@ The system follows the **Fractal Trinity Cosmology**, where three core component
   - Built-in code editor
   - Multi-company support (FAA, Fruitful, VaultMesh, Banimal)
 
+#### 4. Fruitful (Corporate Landing / Brand Hub)
+- **Repository**: `heyns1000/fruitful`
+- **Protocol**: Fruitful Global Brand Experience
+- **Purpose**: Main corporate landing page for Fruitful Global brand
+- **Landing Page**: fruitful.faa.zone
+- **HTML Source**: `attached_assets/index_1756076860974.html`
+- **Preservation Policy**: HTML preserved UNCHANGED - no modifications
+- **Features**:
+  - Corporate branding and identity
+  - Fruitful Innovations showcase
+  - Multi-sector navigation
+  - Global footer with treaty links
+  - Responsive design with dark theme
+
+**IMPORTANT**: The Fruitful landing page HTML is copied exactly as-is with NO transformations, modifications, minification, or processing. This ensures the original design, branding, and functionality remain intact.
+
 ## Integration Configuration
 
 The integration is controlled by `.integration-config.json` in the BuildNest root directory. This file defines:
@@ -106,10 +122,27 @@ The deployment script:
 3. Initializes/clones the target repository
 4. Commits and prepares for push to `heyns1000/codenest`
 
+### Fruitful Deployment
+
+```bash
+# Build Fruitful landing page (copy HTML unchanged)
+npm run build:fruitful
+
+# Deploy to heyns1000/fruitful repository
+npm run deploy:fruitful
+```
+
+The deployment script:
+1. Copies the HTML file UNCHANGED from `attached_assets/index_1756076860974.html`
+2. Creates a deployment directory in `.tmp/fruitful-deploy`
+3. Initializes/clones the target repository
+4. Commits and prepares for push to `heyns1000/fruitful`
+5. **NO code transformation** - preserves original HTML exactly
+
 ### Full System Build
 
 ```bash
-# Build all components (BuildNest, HotStack, CodeNest)
+# Build all components (BuildNest, HotStack, CodeNest, Fruitful)
 npm run build:all
 ```
 
