@@ -1,18 +1,16 @@
 name = "hotstack"
-main = "index.html"
 compatibility_date = "2024-11-27"
-
-[site]
-bucket = "."
-
-# Cloudflare Pages configuration
 pages_build_output_dir = "."
 
+# Cloudflare Pages configuration
+[pages]
+project_name = "hotstack"
+
+# Environment variables (set via dashboard or wrangler secret put)
+[vars]
+CLOUDFLARE_ACCOUNT_ID = ""
+
+# Production environment
 [env.production]
 name = "hotstack"
 route = "hotstack.faa.zone/*"
-zone_name = "faa.zone"
-
-# Workers configuration for dynamic features
-workers_dev = false
-account_id = "${CLOUDFLARE_ACCOUNT_ID}"
