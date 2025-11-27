@@ -6,11 +6,11 @@
   "scripts": {
     "dev": "NODE_ENV=development tsx server/index.ts",
     "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
-    "build:hotstack": "vite build --outDir dist/hotstack --base /",
+    "build:hotstack": "mkdir -p dist/hotstack && cp attached_assets/hotstack_template_v2.html dist/hotstack/index.html",
     "build:codenest": "vite build --outDir dist/codenest --base /",
     "build:fruitful": "mkdir -p dist/fruitful && cp attached_assets/index_1756076860974.html dist/fruitful/index.html",
     "build:all": "npm run build && npm run build:hotstack && npm run build:codenest && npm run build:fruitful",
-    "deploy:hotstack": "npm run build:hotstack && node scripts/deploy-hotstack.js",
+    "deploy:hotstack": "node scripts/deploy-hotstack.mjs",
     "deploy:codenest": "npm run build:codenest && node scripts/deploy-codenest.js",
     "deploy:fruitful": "npm run build:fruitful && node scripts/deploy-fruitful.js",
     "deploy:claimroot": "node scripts/deploy-claimroot.js",
