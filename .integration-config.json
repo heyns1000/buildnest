@@ -1,0 +1,476 @@
+{
+  "name": "BuildNest Integration Hub",
+  "version": "2.0.0",
+  "description": "FAA.zone™ MONSTER OMNI™ System - Integration configuration for Hotstack and CodeNest repositories",
+  "architecture": "Fractal Trinity Cosmology",
+  "repositories": {
+    "buildnest": {
+      "owner": "heyns1000",
+      "name": "buildnest",
+      "role": "Core of Planet / MONSTER OMNI™",
+      "protocol": "Gorilla Comb Logic, VaultMesh Pulse (9s)",
+      "description": "Chaos processing, Scroll signing, and synchronization heartbeat",
+      "url": "https://github.com/heyns1000/buildnest"
+    },
+    "hotstack": {
+      "owner": "heyns1000",
+      "name": "hotstack",
+      "role": "First Man on Mars / HIL",
+      "protocol": "Zero-Signup, Omnidrop, Collapse",
+      "description": "User interface, intake, and autonomous trigger generation",
+      "url": "https://github.com/heyns1000/hotstack",
+      "template": "https://samfox.faa.zone/global_templates/hotstack_vs2.0.html",
+      "landingPage": "hotstack.faa.zone"
+    },
+    "codenest": {
+      "owner": "heyns1000",
+      "name": "codenest",
+      "role": "Development Dashboard",
+      "protocol": "Project Management & API Gateway",
+      "description": "Project management, API keys, templates, and deployment interface",
+      "url": "https://github.com/heyns1000/codenest"
+    },
+    "fruitful": {
+      "owner": "heyns1000",
+      "name": "fruitful",
+      "role": "Corporate Landing / Brand Hub",
+      "protocol": "Fruitful Global Brand Experience",
+      "description": "Main corporate landing page for Fruitful Global - unchanged HTML preserved",
+      "url": "https://github.com/heyns1000/fruitful",
+      "landingPage": "fruitful.faa.zone",
+      "htmlSource": "attached_assets/index_1756076860974.html",
+      "preserveOriginal": true,
+      "features": [
+        "Corporate branding and identity",
+        "Fruitful Innovations showcase",
+        "Multi-sector navigation",
+        "Global footer with treaty links",
+        "Responsive design with dark theme"
+      ]
+    },
+    "fruitfulplanetchange": {
+      "owner": "fruitful-global-planet",
+      "name": "fruitfulplanetchange",
+      "role": "Data Source / App Registration Middleware",
+      "protocol": "FruitfulPlanetChange Intake Protocol",
+      "description": "Real data source for app registration, brand data, and protocol implementations",
+      "url": "https://github.com/fruitful-global-planet/fruitfulplanetchange",
+      "dataTypes": [
+        "Brand information",
+        "App registration templates",
+        "Protocol implementations",
+        "Treaty data",
+        "License templates",
+        "Real project examples"
+      ]
+    },
+    "claimroot": {
+      "owner": "heyns1000",
+      "name": "claimroot",
+      "role": "License Management System",
+      "protocol": "ClaimRoot™ License Generation & Treaty Binding",
+      "description": "License generation, treaty binding verification, and ownership protocols",
+      "url": "https://github.com/heyns1000/claimroot",
+      "status": "integrated",
+      "integrationPhase": "phase2",
+      "integrationPriority": "high",
+      "service": "server/claimroot-service.ts",
+      "features": [
+        "ClaimRoot™ license generation with unique IDs",
+        "Treaty position assignment in Seedwave Treaty Log",
+        "Scroll hash creation for permanent verification",
+        "License trail tracking in VaultMesh ledger",
+        "PDF license metadata generation",
+        "Treaty binding and compliance verification"
+      ],
+      "apiEndpoints": [
+        "POST /api/licenses/generate",
+        "POST /api/licenses/verify",
+        "GET /api/licenses/claimroot/statistics",
+        "GET /api/licenses/treaty-log/:position",
+        "GET /api/licenses/treaty-log"
+      ]
+    },
+    "licensevault": {
+      "owner": "heyns1000",
+      "name": "LicenseVault",
+      "role": "License Storage and Management (VIP)",
+      "protocol": "VaultMesh™ License Storage",
+      "description": "Secure storage and retrieval for ClaimRoot™ licenses with comprehensive audit trail",
+      "url": "https://github.com/heyns1000/LicenseVault",
+      "status": "integrated",
+      "integrationPhase": "phase2",
+      "integrationPriority": "high",
+      "vipService": true,
+      "service": "server/licensevault-service.ts",
+      "features": [
+        "Secure license storage with encryption",
+        "Multi-criteria license retrieval (by ID, app, user, domain)",
+        "Comprehensive audit trail for all operations",
+        "VaultMesh™ synchronization and backup",
+        "License archiving and versioning",
+        "Real-time license status monitoring"
+      ],
+      "apiEndpoints": [
+        "GET /api/licenses/vault/:licenseId",
+        "GET /api/licenses/vault/user/:userId",
+        "GET /api/licenses/vault/domain/:domain",
+        "GET /api/licenses/vault/app/:appId",
+        "GET /api/licenses/vault/verify/:licenseId",
+        "GET /api/licenses/vault/export/:licenseId",
+        "GET /api/licenses/vault/statistics",
+        "GET /api/licenses/vault/audit-log",
+        "GET /api/licenses/vault/audit-log/:licenseId",
+        "GET /api/licenses/vault/health"
+      ]
+    },
+    "banimal": {
+      "owner": "heyns1000",
+      "name": "banimal",
+      "role": "Creative Platform",
+      "protocol": "Brand Asset Management",
+      "description": "Creative asset management and brand identity resources",
+      "url": "https://github.com/heyns1000/banimal",
+      "status": "discovered",
+      "integrationPriority": "high",
+      "features": [
+        "Creative asset management",
+        "Brand identity resources",
+        "Design system integration"
+      ]
+    },
+    "fruitful-api-platform": {
+      "owner": "heyns1000",
+      "name": "fruitful-api-platform",
+      "role": "API Platform & Orchestration Layer",
+      "protocol": "Fruitful Global API Gateway",
+      "description": "Central API platform for coordinating BuildNest, HotStack, CodeNest, and license services",
+      "url": "https://github.com/heyns1000/fruitful-api-platform",
+      "status": "ready",
+      "integrationPhase": "phase2-ready",
+      "integrationPriority": "high",
+      "features": [
+        "API gateway and routing",
+        "Service orchestration",
+        "Authentication and authorization",
+        "Rate limiting and throttling",
+        "API documentation (Swagger/OpenAPI)",
+        "Request/response transformation",
+        "Health monitoring and metrics"
+      ],
+      "readyForProduction": true,
+      "dependencies": [
+        "buildnest",
+        "hotstack",
+        "codenest",
+        "claimroot",
+        "licensevault"
+      ]
+    }
+  },
+  "seedwaveSectors": {
+    "description": "30+ sector-specific repositories under seedwave.faa.zone ecosystem",
+    "totalCount": 30,
+    "integrationStatus": "discovered",
+    "sectors": {
+      "banking": {
+        "repo": "seedwave-banking",
+        "domain": "banking.seedwave.faa.zone",
+        "priority": "high",
+        "integration": ["payment-gateway-templates", "looppay-examples", "securesign-api"]
+      },
+      "technology": {
+        "repo": "seedwave-technology",
+        "domain": "technology.seedwave.faa.zone",
+        "priority": "high",
+        "integration": ["developer-tools", "api-documentation", "technical-deployment"]
+      },
+      "health": {
+        "repo": "seedwave-health",
+        "domain": "health.seedwave.faa.zone",
+        "priority": "medium",
+        "integration": ["healthtrack-components", "medical-protocols", "hipaa-compliance"]
+      },
+      "agriculture": {
+        "repo": "seedwave-agriculture",
+        "domain": "agriculture.seedwave.faa.zone",
+        "priority": "medium",
+        "integration": ["agricultural-templates", "farming-sector-data"]
+      },
+      "education": {
+        "repo": "seedwave-education",
+        "domain": "education.seedwave.faa.zone",
+        "priority": "medium",
+        "integration": ["learning-management", "course-deployment", "educational-content"]
+      },
+      "entertainment": {
+        "repo": "seedwave-entertainment",
+        "domain": "entertainment.seedwave.faa.zone",
+        "priority": "medium",
+        "integration": ["media-streaming", "content-delivery", "social-media"]
+      }
+    }
+  },
+  "integrationPoints": {
+    "hotstackDeployment": {
+      "component": "client/src/components/HotStackDeployment.tsx",
+      "deployTarget": "hotstack",
+      "features": [
+        "Omnidrop Protocol (180-second window)",
+        "Drag & Drop HTML/PDF upload",
+        "6-step deployment pipeline",
+        "DNS hook activation",
+        "MeshNest™ integration",
+        "ClaimRoot™ verification"
+      ]
+    },
+    "codenestDashboard": {
+      "component": "client/src/components/CodeNestDashboard.tsx",
+      "deployTarget": "codenest",
+      "features": [
+        "Project management",
+        "API key generation",
+        "Template library",
+        "Code editor",
+        "Multi-company management",
+        "Real-time deployment metrics"
+      ]
+    }
+  },
+  "buildTargets": {
+    "hotstack": {
+      "entry": "client/src/components/HotStackDeployment.tsx",
+      "outputDir": "dist/hotstack",
+      "publicPath": "/",
+      "template": "attached_assets/hotstack_1756076943625.html",
+      "deployCommand": "npm run build:hotstack",
+      "globalTemplate": "https://samfox.faa.zone/global_templates/hotstack_vs2.0.html"
+    },
+    "codenest": {
+      "entry": "client/src/components/CodeNestDashboard.tsx",
+      "outputDir": "dist/codenest",
+      "publicPath": "/",
+      "deployCommand": "npm run build:codenest"
+    },
+    "fruitful": {
+      "entry": "static",
+      "outputDir": "dist/fruitful",
+      "publicPath": "/",
+      "htmlSource": "attached_assets/index_1756076860974.html",
+      "deployCommand": "npm run build:fruitful",
+      "preserveOriginal": true,
+      "note": "Fruitful landing page HTML is copied unchanged - no build transformation"
+    },
+    "buildnest": {
+      "entry": "client/src/main.tsx",
+      "outputDir": "dist",
+      "publicPath": "/",
+      "deployCommand": "npm run build"
+    }
+  },
+  "dataIntegration": {
+    "enabled": true,
+    "description": "Use REAL data from repositories instead of AI-generated fake data",
+    "dataSources": {
+      "buildnest": {
+        "components": "client/src/components/**/*.tsx",
+        "protocols": "protocols/**/*.ts",
+        "assets": "attached_assets/**/*",
+        "schemas": "shared/schema.ts"
+      },
+      "codenest": {
+        "projects": "Real project templates and examples",
+        "apiKeys": "API key formats and management",
+        "templates": "Production-ready templates"
+      },
+      "fruitfulplanetchange": {
+        "brands": "Real brand data and information",
+        "registrations": "Actual app registration examples",
+        "protocols": "Protocol implementation code",
+        "treaties": "Treaty definitions and structures"
+      }
+    },
+    "workflow": "HotStack Upload → BuildNest Fetch Real Data → AI Polish with Real Data → CodeNest Deploy"
+  },
+  "protocols": {
+    "VaultMeshPulse": {
+      "interval": 9,
+      "unit": "seconds",
+      "description": "High-frequency synchronization heartbeat across all systems"
+    },
+    "ScrollStack": {
+      "enabled": true,
+      "description": "Core scroll signing and validation"
+    },
+    "TreatySync": {
+      "enabled": true,
+      "description": "Centralized management of brands and license contracts"
+    },
+    "ClaimRoot": {
+      "enabled": true,
+      "description": "Secure, traceable site ownership verification"
+    },
+    "Omnidrop": {
+      "enabled": true,
+      "window": 180,
+      "unit": "seconds",
+      "description": "Rapid deployment protocol for instant site activation",
+      "dataMode": "REAL_DATA_ONLY"
+    },
+    "FruitfulPlanetChange": {
+      "enabled": true,
+      "description": "App registration intake middleware with real data integration"
+    }
+  },
+  "deploymentStrategy": {
+    "type": "sovereign-compute",
+    "platform": "DigitalOcean",
+    "orchestrator": "Coolify",
+    "infrastructure": {
+      "nodes": 4,
+      "type": "s-2vcpu-4gb",
+      "region": "nyc3",
+      "costPerMonth": 60,
+      "savingsAnnual": 16740
+    }
+  },
+  "brandEcosystem": {
+    "totalBrands": 7038,
+    "sectors": 29,
+    "treatyNodes": 247,
+    "claimrootLicenses": 1834,
+    "companies": [
+      {
+        "id": "faa",
+        "name": "FAA.zone™",
+        "logo": "🌱",
+        "description": "Primary global entity"
+      },
+      {
+        "id": "fruitful",
+        "name": "Fruitful Global",
+        "logo": "🍎",
+        "description": "Innovation division"
+      },
+      {
+        "id": "vaultmesh",
+        "name": "VaultMesh™",
+        "logo": "🔐",
+        "description": "Security protocols"
+      },
+      {
+        "id": "banimal",
+        "name": "Banimal™",
+        "logo": "🦍",
+        "description": "Creative platform"
+      }
+    ]
+  },
+  "apiEndpoints": {
+    "scroll": [
+      "/api/scroll-status",
+      "/api/scroll-validate",
+      "/api/scroll-pulse"
+    ],
+    "vaultmesh": [
+      "/api/vaultmesh-status",
+      "/api/vaultmesh/pulse-sync/:appId"
+    ],
+    "deployment": [
+      "/api/faa/intake/create",
+      "/api/seedling/intake",
+      "/api/seedling-generate"
+    ],
+    "protocols": [
+      "/api/register-app",
+      "/api/validate-build",
+      "/api/wash-metadata"
+    ],
+    "realData": [
+      "/api/data/fetch-real-brands",
+      "/api/data/fetch-real-projects",
+      "/api/data/fetch-real-templates",
+      "/api/data/fetch-real-protocols",
+      "/api/data/component/:name",
+      "/api/data/polish-user-request",
+      "/api/data/omnidrop-context",
+      "/api/data/sync-repositories",
+      "/api/data/integration-status"
+    ],
+    "infrastructure": {
+      "description": "REAL infrastructure for HotStack deployments - DNS, email, domains, SSL",
+      "mode": "REAL_INFRASTRUCTURE",
+      "endpoints": [
+        "/api/infrastructure/provision-domain",
+        "/api/infrastructure/send-deployment-email",
+        "/api/infrastructure/dns-status/:domain",
+        "/api/infrastructure/setup-email-forwarding",
+        "/api/infrastructure/delete-domain",
+        "/api/infrastructure/enable-ssl",
+        "/api/infrastructure/send-claimroot-email",
+        "/api/infrastructure/complete-deployment",
+        "/api/infrastructure/status"
+      ],
+      "services": {
+        "dns": {
+          "provider": "cloudflare",
+          "api": "https://api.cloudflare.com/client/v4",
+          "baseDomain": "faa.zone",
+          "features": ["A records", "CNAME records", "MX records", "TXT records", "SSL/TLS"]
+        },
+        "email": {
+          "providers": ["resend", "sendgrid"],
+          "fromEmail": "hotstack@faa.zone",
+          "types": ["deployment-success", "claimroot-license", "system-alerts"]
+        }
+      }
+    },
+    "licenses": {
+      "description": "ClaimRoot™ and LicenseVault™ integration for license management",
+      "mode": "REAL_LICENSE_MANAGEMENT",
+      "phase": "phase2",
+      "endpoints": {
+        "generation": [
+          "POST /api/licenses/generate",
+          "POST /api/licenses/verify",
+          "GET /api/licenses/claimroot/statistics",
+          "GET /api/licenses/treaty-log/:position",
+          "GET /api/licenses/treaty-log"
+        ],
+        "vault": [
+          "GET /api/licenses/vault/:licenseId",
+          "GET /api/licenses/vault/user/:userId",
+          "GET /api/licenses/vault/domain/:domain",
+          "GET /api/licenses/vault/app/:appId",
+          "GET /api/licenses/vault/verify/:licenseId",
+          "GET /api/licenses/vault/export/:licenseId",
+          "GET /api/licenses/vault/statistics",
+          "GET /api/licenses/vault/audit-log",
+          "GET /api/licenses/vault/audit-log/:licenseId",
+          "GET /api/licenses/vault/health"
+        ],
+        "status": [
+          "GET /api/licenses/status"
+        ]
+      },
+      "services": {
+        "claimRoot": {
+          "repository": "heyns1000/claimroot",
+          "service": "server/claimroot-service.ts",
+          "features": ["license-generation", "treaty-log", "scroll-hash", "verification"]
+        },
+        "licenseVault": {
+          "repository": "heyns1000/licensevault",
+          "service": "server/licensevault-service.ts",
+          "vip": true,
+          "features": ["secure-storage", "audit-trail", "vaultmesh-sync", "multi-query"]
+        }
+      }
+    }
+  },
+  "healthChecks": {
+    "node": "http://localhost:5000/api/health-check",
+    "python": "http://localhost:3000/health",
+    "database": "postgresql://buildnest@localhost:5432/buildnest"
+  }
+}
