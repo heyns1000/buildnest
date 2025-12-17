@@ -65,6 +65,7 @@ export function QueenBeeControlRoom() {
     fetchStatus();
     
     // Fetch from /api/queen-bee/status every 9 seconds (VaultMesh pulse)
+    // Note: For production with 84 repos, consider WebSocket or SSE for real-time updates
     const interval = setInterval(fetchStatus, 9000);
     
     return () => clearInterval(interval);

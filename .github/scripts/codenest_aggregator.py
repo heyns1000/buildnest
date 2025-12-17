@@ -139,9 +139,32 @@ class CodeNestAggregator:
         print("🐝 Queen Bee Audit Aggregation Complete!")
 
 if __name__ == "__main__":
-    # Placeholder repo list - would be loaded from configuration
-    # For now, using a subset for demonstration
-    repos = [f"org/repo-{i}" for i in range(1, 85)]
+    import argparse
+    
+    parser = argparse.ArgumentParser(
+        description="Aggregate security audits from repositories"
+    )
+    parser.add_argument(
+        "--config",
+        help="Path to repository configuration file (JSON)"
+    )
+    
+    args = parser.parse_args()
+    
+    # Load repository list
+    if args.config:
+        import json
+        with open(args.config, 'r') as f:
+            config_data = json.load(f)
+            repos = config_data.get("repositories", [])
+    else:
+        # TODO: Replace with actual repository list from GitHub API or configuration
+        # Placeholder for demonstration - in production, load from:
+        # - GitHub organization API
+        # - Configuration file
+        # - Database query
+        print("⚠️  Warning: Using placeholder repository list")
+        repos = [f"org/repo-{i}" for i in range(1, 85)]
     
     aggregator = CodeNestAggregator(repos)
     aggregator.run()

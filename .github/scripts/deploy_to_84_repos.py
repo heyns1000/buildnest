@@ -188,14 +188,29 @@ if __name__ == "__main__":
         action="store_true",
         help="Execute live deployment (overrides --dry-run)"
     )
+    parser.add_argument(
+        "--config",
+        help="Path to repository configuration file (JSON)"
+    )
     
     args = parser.parse_args()
     
     # Determine repository list
     if args.repo:
         repos = [args.repo]
+    elif args.config:
+        # Load from configuration file
+        import json
+        with open(args.config, 'r') as f:
+            config_data = json.load(f)
+            repos = config_data.get("repositories", [])
     else:
-        # Placeholder: Load from configuration or GitHub API
+        # TODO: Replace with actual repository list from GitHub API or configuration
+        # Placeholder for demonstration - in production, load from:
+        # - GitHub organization API
+        # - Configuration file
+        # - Database query
+        print("⚠️  Warning: Using placeholder repository list")
         repos = [f"org/repo-{i}" for i in range(1, 85)]
     
     # Determine run mode
