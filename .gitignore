@@ -8,3 +8,7 @@ vite.config.ts.*
 .env
 .env.local
 .env.*.local
+
+# Queen Bee Control Room
+.audit-cache/
+.codenest-reports/
