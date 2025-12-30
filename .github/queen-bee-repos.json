@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "description": "Queen Bee Repository Configuration",
+  "repositories": [
+    "Fruitful-Global-Planet/FruitfulPlanetChange",
+    "heyns1000/buildnest"
+  ],
+  "notes": [
+    "This is a sample configuration file.",
+    "In production, populate this with the actual 84 repositories to monitor.",
+    "Can be generated via GitHub API or manually curated."
+  ]
+}

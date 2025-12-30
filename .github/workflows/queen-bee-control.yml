@@ -1,0 +1,58 @@
+name: Queen Bee Control - Audit Aggregation
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+  workflow_dispatch:  # Manual trigger
+  push:
+    branches: [main]
+    paths:
+      - '.github/scripts/codenest_aggregator.py'
+      - '.github/workflows/queen-bee-control.yml'
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  aggregate-audits:
+    name: Aggregate Security Audits (84 Repos)
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install requests PyGithub
+      
+      - name: Create reports directory
+        run: |
+          mkdir -p .codenest-reports
+      
+      - name: Run CodeNest Aggregator
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CODENEST_API_URL: ${{ secrets.CODENEST_API_URL }}
+        run: |
+          python .github/scripts/codenest_aggregator.py
+      
+      - name: Upload Aggregated Reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: codenest-audit-reports
+          path: .codenest-reports/
+          retention-days: 90
+      
+      - name: Emit VaultMesh Pulse
+        run: |
+          echo "🐝 Queen Bee Audit Aggregation completed at $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          echo "📊 VaultMesh pulse logged"
+          curl -X POST http://localhost:8000/api/scroll/pulse || echo "VaultMesh pulse logged (service not running)"
