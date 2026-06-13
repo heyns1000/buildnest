@@ -1,213 +1,108 @@
-<!-- FRUITFUL™ BANNER -->
-<p align="center">
-  <img src="https://raw.githubusercontent.com/heyns1000/codenest/claude/lucid-rubin-h1k269/docs/assets/fruitful-banner.png" width="100%" alt="Fruitful™ — BuildNest MONSTER OMNI™ Engine" />
-</p>
+<img src=".github/assets/fruitful-banner.png" width="100%" alt="Fruitful™" />
 
-# BuildNest™ — MONSTER OMNI™ Engine
+# BuildNest™
 
-**The Raw Material Manufacturer | Sovereign Compute Dispatch Engine**  
-FRUITFUL SHOPS (PTY) LTD | Reg: 2021/121654/07 | VAT: 4400302974  
-© 2021–2026 All Rights Reserved | Incorporator: SCHOEMAN HEYNS  
-`GC7:FSP2021121654:4400302974:VM9s:BL1501:GHOST7CHAIN:FAA13713`
-
-Licence: [Fruitful Shops Proprietary License v1.1](./LICENSE)
+**By FRUITFUL SHOPS (PTY) LTD**
 
 ---
 
-## What BuildNest Is — In Plain Language
+We built BuildNest because the world’s best ideas were dying in folders.
 
-> **BuildNest is the factory.** It manufactures the raw material.
-> Everything it produces gets dispatched and cloned into CodeNest™,
-> the ecosystem monorepo, where it is indexed, heatmapped, synced,
-> and distributed to 400+ frontend applications worldwide.
+A developer in Pretoria with 67 apps, 13 713 brand concepts, and a Google Drive full of chaos had no tool that could hold all of it — process it, sign it, and ship it without burning $18 000 a year on serverless fees. So we built the engine ourselves.
 
-BuildNest stands alone as the **MONSTER OMNI™ engine** — a self-contained,
-chaos-processing, dual-service build platform. It does not depend on CodeNest
-to function. CodeNest depends on BuildNest as its primary manufacturing input.
+BuildNest is that engine. It is not a platform. It is not a service. It is a **sovereign compute manufacturer** — a dual-service build machine that takes raw, disorganised creative input and outputs cryptographically signed, watermarked artefacts ready for global distribution. We call this the **MONSTER OMNI™ system**.
 
 ---
 
-## The Fractal Trinity — Where BuildNest Sits
+## What We Do
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│              FRACTAL TRINITY COSMOLOGY                      │
-│                                                             │
-│  HotStack™          LicenseVault™        BuildNest™         │
-│  ─────────────      ──────────────       ──────────────     │
-│  First Man          Earth /              Core of Planet /   │
-│  on Mars / HIL      Global Catalog       MONSTER OMNI™      │
-│                                                             │
-│  Zero-Signup        TreatySync™:         Gorilla Comb       │
-│  Omnidrop           13,713 brands        Logic +            │
-│  Collapse           & contracts          VaultMesh Pulse    │
-│  Trigger            managed here         (9-second beat)    │
-│                                                             │
-│         ↓                ↓                    ↓             │
-│  ┌──────────────────────────────────────────────────────┐   │
-│  │           CodeNest™ — Ecosystem Monorepo             │   │
-│  │   Intake Heatmap → Sync → Distribute → 400+ Apps    │   │
-│  └──────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────┘
-```
+BuildNest accepts chaos and returns order.
+
+A folder of duplicated files, conflicting versions, nested directories with no structure — all of it goes in. **Gorilla Comb Logic™** processes it. Every output file carries the immutable **VaultMesh GhostTrace™ watermark** (`GC7:FSP2021121654:4400302974:VM9s:BL1501:GHOST7CHAIN:FAA13713`). Every 9 seconds, the **VaultMesh Pulse™** beats. The Scroll is signed. The artefact is dispatched.
+
+From here it goes to **CodeNest™** — our ecosystem monorepo — where it is indexed, heatmapped, and distributed to over 400 frontend applications: Replit, Shopify, WordPress, Lovable, Wix, Hercules, and more.
 
 ---
 
-## MONSTER OMNI™ System Architecture
+## The Stack
 
-BuildNest runs as a **dual-service sovereign stack** — Node/Express handles the
-application factory and client assets; Python/FastAPI manages the Scroll identity,
-cryptographic signing, and VaultMesh synchronisation heartbeat.
+BuildNest runs as two services side by side, always:
 
-### Dual-Service Stack
+| Service | What It Does |
+|---------|-------------|
+| **Node / Express** | Application factory, client assets, REST API |
+| **Python / FastAPI** | Scroll identity, cryptographic signing, VaultMesh pulse |
+| **PostgreSQL 16** | Persistent scroll ledger and brand registry |
 
-| Service | Runtime | Port | Role |
-|---------|---------|------|------|
-| `buildnest-node` | Node 20 / Express | 5000 | Application factory, client assets, REST API |
-| `buildnest-python` | Python 3.11 / FastAPI | 8000 | Scroll signing, VaultMesh pulse, TreatySync |
-| `buildnest-db` | PostgreSQL 16 | 5432 | Persistent scroll ledger, brand registry |
-
-### VaultMesh Pulse — 9-Second Heartbeat
-
-```python
-async def emit_scroll_pulse():
-    """Emit scroll pulse every 9 seconds for VaultMesh synchronisation"""
-    while True:
-        pulse_data = {
-            "timestamp": datetime.utcnow().isoformat(),
-            "network_health": vault_mesh.network_health,
-            "mars_condition": "PLANETARY_MOTION_AUTHORIZED"
-        }
-        logger.info(f"🧬 Scroll pulse emitted: {pulse_data}")
-        await asyncio.sleep(9)  # 9-second VaultMesh interval
-```
-
-### Gorilla Comb Logic — Chaos to Order
-
-BuildNest's core intake protocol accepts **completely disorganised input** —
-duplicated files, nested chaos folders, conflicting versions — and applies the
-immutable VaultMesh Trace watermark to all artefacts before dispatch:
-
-```
-Chaotic Input (any structure)  →  Gorilla Comb Logic  →  Watermarked Output
-    /Project/v1/file.ts                                     GC7:FSP...FAA13713
-    /Project/copy/file.ts                                   Signed Scroll
-    /Backup/Project/file.ts                                 Ready for dispatch
-```
+All three live on a **4-node DigitalOcean sovereign cluster** orchestrated by Coolify. No Vercel. No Render. No egress fees. Fixed cost: **~$1 260 per year**. That is a saving of **$16 740 annually** against the PaaS alternative.
 
 ---
 
-## Sovereign Infrastructure (Fixed-Cost TCO)
+## The Scroll
 
-| Model | Annual Cost | Notes |
-|-------|-------------|-------|
-| PaaS lock-in (Vercel/Render) | ~$18,000 | Serverless, egress fees, proprietary |
-| **Sovereign Compute** | **~$1,260** | 4-Node DigitalOcean + Coolify orchestrator |
-| **Annual Saving** | **$16,740** | Fixed TCO, zero egress (Cloudflare R2) |
-
-**4-Node Sovereign Hub Cluster:**
-- 1× Manager node (Coolify orchestrator)
-- 3× Worker nodes (buildnest-node / buildnest-python / Postgres)
-- Region: `nyc3` | Size: `s-2vcpu-4gb` | Image: `ubuntu-24-04-x64`
-
----
-
-## Scroll Data Model
+Every build produces a **Scroll** — a signed build artefact with a cryptographic identity:
 
 ```python
 class ScrollMetadata(BaseModel):
     scroll_id: str
     treaty_position: int
     claim_root_license: str
-    funding_amount: float = Field(ge=50000)  # Minimum $50K requirement
-    scroll_signature: Optional[str] = None
-    vault_mesh_sync: bool = False
-    planetary_motion_authorized: bool = False
+    funding_amount: float       # minimum $50 000
+    scroll_signature: str       # RSA 2048-bit
+    vault_mesh_sync: bool       # confirmed on 9-second pulse
+    planetary_motion_authorized: bool
 ```
 
-Scrolls are signed with RSA 2048-bit keys, anchored via GhostTrace™ 7-chain
-cryptographic proof, and emitted to the VaultMesh network every 9 seconds.
+Scrolls are anchored via **GhostTrace™ 7-chain cryptographic proof**. Tamper with any file, and the chain breaks. The Pulse catches it within 9 seconds.
 
 ---
 
-## Dispatch → CodeNest™
+## Where BuildNest Lives
 
-When a BuildNest build cycle completes, all watermarked artefacts are dispatched
-to **CodeNest™** (`heyns1000/codenest`) — the ecosystem monorepo that acts as
-the intake heatmap, sync engine, and distribution hub for 400+ frontend apps.
+BuildNest is a **standalone engine**. It runs without any other system. But it is also the manufacturing core inside **CodeNest™** (`heyns1000/codenest`) — the FAA™ ecosystem monorepo.
 
 ```
-BuildNest™ (this repo)          CodeNest™ (heyns1000/codenest)
-────────────────────            ────────────────────────────────
-Manufactures raw material  →→→  Clones BuildNest output
-Signs Scrolls                   Indexes into heatmap
-Emits VaultMesh pulse           Syncs to Base44 API hub
-Gorilla Comb watermarks         Distributes to 400+ apps
+BuildNest™ (standalone)      →  dispatch  →  CodeNest™ (monorepo hub)
+Manufactures raw material                    Intake · Heatmap · Sync · Distribute
+                                                        ↓
+                                             fruitfulapp.base44.app
+                                                        ↓
+                                              400+ apps worldwide
 ```
-
-See the full sync architecture:  
-[`docs/architecture/codenest-to-base44-sync.md`](https://github.com/heyns1000/codenest/blob/claude/lucid-rubin-h1k269/docs/architecture/codenest-to-base44-sync.md)
 
 ---
 
-## Quick Start (Local Development)
+## Get Started
 
 ```bash
-# Clone standalone
 git clone https://github.com/heyns1000/buildnest.git
 cd buildnest
-
-# Set environment
-cp .env.example .env
-# Edit: DB_PASSWORD, SESSION_SECRET, VAULT_MESH_SECRET
-
-# Run dual-service stack
+cp .env.example .env          # set DB_PASSWORD, SESSION_SECRET, VAULT_MESH_SECRET
 docker compose up --build
-
-# Node API:   http://localhost:5000
-# Python API: http://localhost:8000
-# Health:     http://localhost:5000/health
 ```
+
+Node API at `http://localhost:5000` · Python API at `http://localhost:8000`
+
+For local development without Docker:
 
 ```bash
-# Development (no Docker)
-npm install
-npm run dev          # Node/Express on :5000
-# In separate terminal:
-pip install -r requirements.txt
-uvicorn main:app --reload --port 8000
+npm install && npm run dev
+# in a second terminal:
+pip install -r requirements.txt && uvicorn main:app --reload --port 8000
 ```
 
 ---
 
-## Scripts
+## Banimal Loop™
 
-| Script | Purpose |
-|--------|--------|
-| `npm run build` | Full production build (Vite + esbuild) |
-| `npm run build:all` | Build all deployment targets (hotstack, codenest, fruitful) |
-| `npm run deploy:hotstack` | Deploy HotStack™ target |
-| `npm run deploy:codenest` | Build + deploy CodeNest™ target |
-| `npm run deploy:claimroot` | Deploy ClaimRoot™ governance module |
-| `npm run deploy:licensevault` | Deploy LicenseVault™ brand catalog |
-| `npm run db:push` | Push Drizzle ORM schema to Postgres |
+Every payment transaction processed through the BuildNest ecosystem carries the **Banimal Loop™ 15.01% wildlife care allocation**. This is not optional. It is enforced at the API level. Removing or reducing it constitutes breach of the governing licence.
 
 ---
 
-## Repository Status
+## Licence
 
-| Item | Status |
-|------|--------|
-| Code secured on GitHub | ✅ `heyns1000/buildnest` |
-| Cloned into CodeNest™ monorepo | ✅ `heyns1000/codenest` |
-| Proprietary licence applied | ✅ v1.1 |
-| VaultMesh watermark | ✅ `GC7:FSP2021121654:4400302974:VM9s:BL1501:GHOST7CHAIN:FAA13713` |
-| Dual-service Docker stack | ✅ Node + Python + Postgres |
-| Sovereign infrastructure plan | ✅ 4-Node DigitalOcean cluster |
-
----
-
-**GORILLA COMB™ VAULTMESH LEVEL-7**  
+[Fruitful Shops Proprietary License v1.1](./LICENSE) — All rights reserved.  
 FRUITFUL SHOPS (PTY) LTD | Reg: 2021/121654/07 | VAT: 4400302974  
-© 2021–2026 All Rights Reserved  
+Gauteng High Court, Pretoria | legal@fruitful.faa.zone
+
 `GC7:FSP2021121654:4400302974:VM9s:BL1501:GHOST7CHAIN:FAA13713`
