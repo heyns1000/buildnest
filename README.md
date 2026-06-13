@@ -1,4 +1,4 @@
-<img src=".github/assets/fruitful-banner.png" width="100%" alt="Fruitful™" />
+<img src="assets/fruitful-banner.png" width="100%" alt="Fruitful™" />
 
 # BuildNest™
 
