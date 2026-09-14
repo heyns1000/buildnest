@@ -7,6 +7,7 @@ VaultMesh Integration with Cryptographic Validation
 
 from fastapi import FastAPI, HTTPException, Request, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 from typing import Optional, List, Dict, Any
 import asyncio
@@ -178,18 +179,43 @@ class VaultMeshConnector:
 # Initialize VaultMesh connector
 vault_mesh = VaultMeshConnector()
 
-# Background task for scroll pulse emission
+# BuildNest™ engine registry — the real engines from the BuildNest AI Engine Console
+BUILDNEST_ENGINES = [
+    ("corethink", "Corethink™", "🧠"),
+    ("truthweight", "TruthWeight™", "🔍"),
+    ("echosynth", "EchoSynth™", "🔄"),
+    ("autosigil", "AutoSigil™", "🛡️"),
+    ("pulseindex", "PulseIndex™", "📊"),
+    ("omnitrace", "OmniTrace™", "📋"),
+    ("lifthalo", "LiftHalo™", "🔒"),
+    ("mirrorloop", "MirrorLoop™", "🔄"),
+    ("fireratio", "FireRatio™", "🔥"),
+]
+
+# Registry of agents connected to the 0.08s data push
+connected_agents: set = set()
+
+# Background task for scroll pulse emission — every 9 seconds an agent
+# activates and fires up the next BuildNest™ engine
 async def emit_scroll_pulse():
     """Emit scroll pulse every 9 seconds for VaultMesh synchronization"""
+    tick = 0
     while True:
         try:
+            engine_id, engine_name, engine_glyph = BUILDNEST_ENGINES[tick % len(BUILDNEST_ENGINES)]
+            agent_id = f"agent_faa_{int(time.time())}_{uuid.uuid4().hex[:6]}"
+            tick += 1
             pulse_data = {
                 "timestamp": datetime.utcnow().isoformat(),
                 "nodes_active": vault_mesh.nodes_active,
                 "scrolls_active": vault_mesh.scrolls_active,
                 "network_health": vault_mesh.network_health,
-                "mars_condition": "PLANETARY_MOTION_AUTHORIZED"
+                "mars_condition": "PLANETARY_MOTION_AUTHORIZED",
+                "agent_activated": agent_id,
+                "engine_fired": engine_id,
+                "engine_name": engine_name
             }
+            logger.info(f"{engine_glyph} Agent {agent_id} activated → {engine_name} FIRED UP")
             logger.info(f"🧬 Scroll pulse emitted: {pulse_data}")
             await asyncio.sleep(vault_mesh.pulse_interval)
         except Exception as e:
@@ -387,6 +413,32 @@ async def get_scroll_pulse():
         "treaties_synced": 247 + (int(time.time()) % 10),
         "dns_synchronized": True
     }
+
+@app.get("/api/scroll/agents/stream")
+async def stream_agent_data():
+    """Push short pulse data to all agents every 0.08 seconds"""
+    agent_id = f"agent_{uuid.uuid4().hex[:8]}"
+    connected_agents.add(agent_id)
+
+    async def event_generator():
+        try:
+            while True:
+                payload = {
+                    "agent_id": agent_id,
+                    "agents_connected": len(connected_agents),
+                    "push_interval": "0.08s",
+                    "timestamp": datetime.utcnow().isoformat(),
+                    "nodes_active": vault_mesh.nodes_active,
+                    "scrolls_active": vault_mesh.scrolls_active,
+                    "network_health": vault_mesh.network_health,
+                    "mars_condition": "PLANETARY_MOTION_AUTHORIZED"
+                }
+                yield f"data: {json.dumps(payload)}\n\n"
+                await asyncio.sleep(0.08)
+        finally:
+            connected_agents.discard(agent_id)
+
+    return StreamingResponse(event_generator(), media_type="text/event-stream")
 
 # Queen Bee Control Room API Endpoints
 
