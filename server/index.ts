@@ -1,4 +1,5 @@
 import express, { type Request, Response, NextFunction } from "express";
+import path from "path";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import intakeMiddleware from "../protocols/FruitfulPlanetChange/intake-middleware";
@@ -42,6 +43,13 @@ app.use((req, res, next) => {
 
 (async () => {
   const server = await registerRoutes(app);
+
+  // Baobab Terminal — real Portal.faa.zone central access hub (user-provided HTML)
+  app.get("/baobab-terminal", (_req: Request, res: Response) => {
+    res.sendFile(
+      path.join(import.meta.dirname, "..", "attached_assets", "baobab_terminal_1756061197024.html")
+    );
+  });
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
