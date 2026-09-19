@@ -10,6 +10,7 @@ import ScrollExplainerPage from "@/pages/scroll-explainer";
 import TreatySyncPage from "@/pages/treaty-sync";
 import VoorwaardMarsPage from "@/pages/voorwaard-mars";
 import SeedwaveDeploymentPage from "@/pages/seedwave-deployment";
+import UnderR50Catalogue from "@/pages/under-r50-catalogue";
 import { QueenBeeControlRoom } from "@/pages/queen-bee-control";
 import BoliLanding from "@/pages/boli";
 import NotFound from "@/pages/not-found";
@@ -26,6 +27,7 @@ function Router() {
       <Route path="/treaty-sync" component={TreatySyncPage} />
       <Route path="/voorwaard-mars" component={VoorwaardMarsPage} />
       <Route path="/seedwave-deployment" component={SeedwaveDeploymentPage} />
+      <Route path="/under-r50-catalogue" component={UnderR50Catalogue} />
       <Route path="/queen-bee/control" component={QueenBeeControlRoom} />
       <Route path="/boli" component={BoliLanding} />
       <Route component={NotFound} />

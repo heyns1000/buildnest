@@ -67,6 +67,14 @@ const navigationItems: NavItem[] = [
     description: 'Scroll-based app deployment with VaultMesh and OmniGrid',
     scrollBound: true,
     status: 'new'
+  },
+  {
+    path: '/under-r50-catalogue',
+    name: 'Under R50 Catalogue',
+    icon: '🛒',
+    description: 'Fruitful Shops retail catalogue of everyday items under R50',
+    scrollBound: true,
+    status: 'new'
   }
 ];
 
