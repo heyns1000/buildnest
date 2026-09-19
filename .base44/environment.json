@@ -2,5 +2,18 @@
   "previewPort": 3000,
   "healthPath": "/",
   "startCommand": "docker compose -f docker-compose.base44.yml up -d",
-  "secrets": []
+  "secrets": [
+    {
+      "name": "HSOMNI9000_API_KEY",
+      "description": "Shared API key authenticating Heyns1000 QS Command Center webhook requests (sent as X-API-KEY header by the sender)"
+    },
+    {
+      "name": "QS_WEBHOOK_SECRET",
+      "description": "Shared HMAC secret the QS Command Center uses to sign webhook bodies (X-QS-Signature: sha256=...); optional — signature verification is active only when set"
+    },
+    {
+      "name": "QS_COMMAND_CENTER_ENDPOINT",
+      "description": "QS Command Center telemetry URL that BuildNest POSTs confirmations back to"
+    }
+  ]
 }

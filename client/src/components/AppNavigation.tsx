@@ -67,6 +67,30 @@ const navigationItems: NavItem[] = [
     description: 'Scroll-based app deployment with VaultMesh and OmniGrid',
     scrollBound: true,
     status: 'new'
+  },
+  {
+    path: '/under-r50-catalogue',
+    name: 'Under R50 Catalogue',
+    icon: '🛒',
+    description: 'Fruitful Shops retail catalogue of everyday items under R50',
+    scrollBound: true,
+    status: 'new'
+  },
+  {
+    path: '/global-gary-chat',
+    name: 'Global Gary Chat',
+    icon: '🧠',
+    description: 'Live agent thinking stream — all 9 engines, 30s rotation, burn after reading',
+    scrollBound: true,
+    status: 'new'
+  },
+  {
+    path: '/seedwave-atlas',
+    name: 'Seedwave Atlas',
+    icon: '🗺️',
+    description: 'The verified 31-entry index of the Banimal™ ecosystem across 7 repositories',
+    scrollBound: true,
+    status: 'new'
   }
 ];
 

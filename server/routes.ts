@@ -6,6 +6,7 @@ import metadataWasher from "../protocols/OmniGrid/metadata-washer";
 import { registerRealDataRoutes } from "./real-data-routes";
 import { registerInfrastructureRoutes } from "./infrastructure-routes";
 import { registerLicenseRoutes } from "./license-routes";
+import { registerQSCommandCenterRoutes } from "./qs-command-center-routes";
 import "./types"; // Import extended types
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -720,6 +721,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Register License Management API routes for ClaimRoot™ and LicenseVault™
   registerLicenseRoutes(app);
+
+  // Register Heyns1000 QS Command Center webhook bridge routes
+  registerQSCommandCenterRoutes(app);
 
   const httpServer = createServer(app);
 
