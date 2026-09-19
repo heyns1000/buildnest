@@ -11,6 +11,8 @@ import TreatySyncPage from "@/pages/treaty-sync";
 import VoorwaardMarsPage from "@/pages/voorwaard-mars";
 import SeedwaveDeploymentPage from "@/pages/seedwave-deployment";
 import UnderR50Catalogue from "@/pages/under-r50-catalogue";
+import GlobalGaryChat from "@/pages/global-gary-chat";
+import SeedwaveAtlas from "@/pages/seedwave-atlas";
 import { QueenBeeControlRoom } from "@/pages/queen-bee-control";
 import BoliLanding from "@/pages/boli";
 import NotFound from "@/pages/not-found";
@@ -28,6 +30,8 @@ function Router() {
       <Route path="/voorwaard-mars" component={VoorwaardMarsPage} />
       <Route path="/seedwave-deployment" component={SeedwaveDeploymentPage} />
       <Route path="/under-r50-catalogue" component={UnderR50Catalogue} />
+      <Route path="/global-gary-chat" component={GlobalGaryChat} />
+      <Route path="/seedwave-atlas" component={SeedwaveAtlas} />
       <Route path="/queen-bee/control" component={QueenBeeControlRoom} />
       <Route path="/boli" component={BoliLanding} />
       <Route component={NotFound} />
