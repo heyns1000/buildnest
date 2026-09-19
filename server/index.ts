@@ -5,7 +5,8 @@ import { setupVite, serveStatic, log } from "./vite";
 import intakeMiddleware from "../protocols/FruitfulPlanetChange/intake-middleware";
 
 const app = express();
-app.use(express.json());
+// Capture the raw body so webhook HMAC signatures (X-QS-Signature) can be verified
+app.use(express.json({ verify: (req: any, _res, buf) => { req.rawBody = buf; } }));
 app.use(express.urlencoded({ extended: false }));
 
 // FAA ScrollStack: Inject FruitfulPlanetChange intake middleware

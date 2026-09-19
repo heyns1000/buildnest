@@ -29,6 +29,14 @@ docker compose -f docker-compose.base44.yml up -d
 - `/api/scroll/agents/stream` is an SSE endpoint pushing pulse data to all connected agents every 0.08 seconds.
 - Key endpoints: `/health`, `/api/treaty-sync/intake`, `/api/claimroot/generate`, `/api/vaultmesh/status`, `/api/scroll/pulse`, `/api/queen-bee/*`.
 
+## QS Command Center Webhook Bridge
+
+- `POST /api/webhooks/qs-command-center` (`server/qs-command-center-routes.ts`) — Heyns1000 QS Command Center inbound bridge. Handles `tail_finding.trigger` and `boq.line_sync`, responds with Atom-level immutable confirmation (status `INLINE`, locked state `v111`).
+- Auth: `X-API-KEY` checked against `HSOMNI9000_API_KEY`; optional HMAC via `X-QS-Signature: sha256=<hmac of raw body>` verified against `QS_WEBHOOK_SECRET`. When the vars are unset the route accepts with a warning (dev mode) — same graceful-absence convention as the other routes.
+- Outbound telemetry: `sendQSTelemetry(event, data)` in `server/qs-telemetry.ts` POSTs to `QS_COMMAND_CENTER_ENDPOINT` (fire-and-forget).
+- Secrets are delivered via `/run/base44/app.env` (wired into the app service's `env_file`).
+- Tests: `npm test` (runs `tsx --test tests/qs-command-center.test.ts`) — integration tests that spin up the real route on an ephemeral port.
+
 ## Notes
 - No external API keys required to boot. Cloudflare/Resend/SendGrid keys are optional (DNS/email features); routes handle their absence gracefully.
 - Vite runs in middleware mode with `allowedHosts: true` (accepts all hosts).
